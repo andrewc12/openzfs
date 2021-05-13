@@ -35,6 +35,7 @@
 command -v fio > /dev/null || log_unsupported "fio missing"
 
 TMPDIR=${TMPDIR:-$TEST_BASE_DIR}
+TMPDIR=$(realpath $TMPDIR)
 
 DISK1="$TMPDIR/dsk1"
 DISK2="$TMPDIR/dsk2"

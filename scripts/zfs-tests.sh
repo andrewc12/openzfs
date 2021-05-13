@@ -41,7 +41,9 @@ FILESIZE="4G"
 DEFAULT_RUNFILES="common.run,$(uname | tr '[:upper:]' '[:lower:]').run"
 RUNFILES=${RUNFILES:-$DEFAULT_RUNFILES}
 FILEDIR=${FILEDIR:-/var/tmp}
-DISKS=${DISKS:-""}
+FILEDIR=$(realpath ${FILEDIR})
+# DISKS=${DISKS:-""}
+DISKS="$(diskutil list |grep 21|head -3|awk '{print $NF}'|xargs)"
 SINGLETEST=""
 SINGLETESTUSER="root"
 TAGS=""
@@ -331,6 +333,9 @@ constrain_path() {
 		ln -fs /usr/sbin/dseditgroup "$STF_PATH/dseditgroup"
 		ln -fs /usr/bin/xattr "$STF_PATH/xattr"
 		ln -fs /usr/sbin/createhomedir "$STF_PATH/createhomedir"
+		[ -f "/usr/local/bin/gawk" ] && ln -fs /usr/local/bin/gawk "$STF_PATH/nawk"
+		[ -f "/usr/local/bin/gcp" ] && ln -fs /usr/local/bin/gcp "$STF_PATH/cp"
+		[ -f "/usr/local/bin/gsed" ] && ln -fs /usr/local/bin/gsed "$STF_PATH/sed"
 	fi
 }
 
@@ -740,6 +745,19 @@ mktemp_file() {
 		mktemp -u "${FILEDIR}/$1.XXXXXX"
 	elif [ "$UNAME" = "Darwin" ]; then
 		mktemp -u "${FILEDIR}/$1.XXXXXX"
+		# This feels a little hacky, better way?
+		DYLD_LIBRARY_PATH=$STF_SUITE/cmd/librt/.libs:$DYLD_LIBRARY_PATH
+		export DYLD_LIBRARY_PATH
+		# Tell ZFS to not to use /Volumes
+		__ZFS_MAIN_MOUNTPOINT_DIR=/
+		export __ZFS_MAIN_MOUNTPOINT_DIR
+		# Use /dev even with non-debug build and avoid InvariantDisks
+		ZPOOL_IMPORT_PATH=/dev
+		export ZPOOL_IMPORT_PATH
+		# Catalina and up has root as read/only.
+		# BigSur gets even harder.
+		sudo /sbin/mount -uw /
+		export SHELL=ksh
 	else
 		mktemp -ut "$1.XXXXXX" -p "$FILEDIR"
 	fi

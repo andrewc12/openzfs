@@ -73,6 +73,8 @@ function mini_format
 		parted $disk -s -- mklabel gpt
 	elif is_freebsd; then
 		gpart create -s gpt $disk
+	elif is_macos; then
+		gpt create $disk
 	else
 		format -e -s -d $disk -f <(printf '%s\n' partition modify)
 	fi

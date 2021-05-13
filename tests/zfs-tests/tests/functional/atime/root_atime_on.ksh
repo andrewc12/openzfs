@@ -63,7 +63,16 @@ do
 
 	if [[ $dst == $TESTPOOL/$TESTFS@$TESTSNAP ]]; then
 		mtpt=$(snapshot_mountpoint $dst)
+
+                if is_macos; then
+                        log_must zfs mount $TESTPOOL/$TESTFS@$TESTSNAP
+                fi
+
 		log_mustnot check_atime_updated $mtpt/$TESTFILE
+
+		if is_macos; then
+			log_must zfs unmount $TESTPOOL/$TESTFS@$TESTSNAP
+		fi
 	else
 		log_must zfs set atime=on $(dirname $dst)
 		# inherited relatime won't apply because of mount option, set explicitly

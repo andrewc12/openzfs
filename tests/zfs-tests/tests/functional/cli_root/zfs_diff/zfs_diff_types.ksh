@@ -70,7 +70,7 @@ DATASET="$TESTPOOL/$TESTFS/fs"
 TESTSNAP1="$DATASET@snap1"
 TESTSNAP2="$DATASET@snap2"
 FILEDIFF="$TESTDIR/zfs-diff.txt"
-if is_freebsd; then
+if ( is_freebsd || is_macos ); then
 	MAJOR=$(stat -f %Hr /dev/null)
 	MINOR=$(stat -f %Lr /dev/null)
 else
@@ -81,6 +81,7 @@ fi
 # 1. Prepare a dataset
 log_must zfs create $DATASET
 MNTPOINT="$(get_prop mountpoint $DATASET)"
+MNTPOINT=$(realpath "$MNTPOINT")
 log_must zfs set devices=on $DATASET
 log_must zfs set xattr=sa $DATASET
 

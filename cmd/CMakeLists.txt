@@ -10,3 +10,5 @@ add_subdirectory(zdb)
 add_subdirectory(zstream)
 add_subdirectory(os/windows/kstat)
 add_subdirectory(os/windows/zfsinstaller)
+add_subdirectory(badsend)
+

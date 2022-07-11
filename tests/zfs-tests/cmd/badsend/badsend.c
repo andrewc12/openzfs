@@ -39,8 +39,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sysexits.h>
-#include <err.h>
+#include "sysexits.h"
+#include "err.h"
 
 static void
 usage(const char *name)

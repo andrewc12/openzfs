@@ -19,6 +19,11 @@
 #include <sys/btree.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#define	RLIMIT_CORE 256
+
+
+
+
 
 #define	BUFSIZE 256
 
@@ -232,7 +237,7 @@ drain_tree(zfs_btree_t *bt, char *why)
 	for (i = 0; i < 64 * 1024; i++) {
 		void *ret;
 
-		u_longlong_t randval = random();
+		u_longlong_t randval = 0;  //random();
 		node = malloc(sizeof (int_node_t));
 		if ((p = (uint64_t *)zfs_btree_find(bt, &randval, &bt_idx)) !=
 		    NULL) {
@@ -312,7 +317,7 @@ stress_tree(zfs_btree_t *bt, char *why)
 		zfs_btree_index_t bt_idx = {0};
 		avl_index_t avl_idx = {0};
 
-		uint64_t randval = random() % tree_limit;
+		uint64_t randval = 0; // random() % tree_limit;
 		node = malloc(sizeof (*node));
 		node->data = randval;
 
@@ -495,7 +500,7 @@ main(int argc, char *argv[])
 		(void) gettimeofday(&tp, NULL);
 		seed = tp.tv_sec;
 	}
-	srandom(seed);
+	//srandom(seed);
 
 	zfs_btree_init();
 	zfs_btree_create(&bt, zfs_btree_compare, sizeof (uint64_t));

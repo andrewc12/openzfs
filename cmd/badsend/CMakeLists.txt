@@ -3,6 +3,8 @@ use_clang()
 
 um_add_executable(badsend
 	 badsend.c
+	 err.c
+	 err.h
 )
 target_link_libraries(badsend PRIVATE
 	libnvpair

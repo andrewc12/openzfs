@@ -16,4 +16,4 @@ C:\Users\andre\Documents\GitHub\openzfs\tests\zfs-tests\cmd\largest_file\largest
 #[[add_subdirectory(mkbusy)]]
 #[[add_subdirectory(mkfile)]]
 
-
+add_subdirectory(stride_dd)

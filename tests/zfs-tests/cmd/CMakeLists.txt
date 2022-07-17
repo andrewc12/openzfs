@@ -17,3 +17,6 @@ C:\Users\andre\Documents\GitHub\openzfs\tests\zfs-tests\cmd\largest_file\largest
 #[[add_subdirectory(mkfile)]]
 add_subdirectory(send_doall)
 add_subdirectory(stride_dd)
+#[[add_subdirectory(rename_dir)]]
+#[[add_subdirectory(rm_lnkcnt_zero_file)]]
+add_subdirectory(threadsappend)

@@ -15,5 +15,5 @@ add_subdirectory(get_diff)
 C:\Users\andre\Documents\GitHub\openzfs\tests\zfs-tests\cmd\largest_file\largest_file.c(77,16): error : use of undeclared identifier 'SIGXFSZ']]
 #[[add_subdirectory(mkbusy)]]
 #[[add_subdirectory(mkfile)]]
-
+add_subdirectory(send_doall)
 add_subdirectory(stride_dd)

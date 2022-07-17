@@ -6,5 +6,4 @@ add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
 add_subdirectory(badsend)
 add_subdirectory(btree_test)
-
-
+add_subdirectory(file_check)

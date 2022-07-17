@@ -11,3 +11,9 @@ add_subdirectory(file_check)
 #[[add_subdirectory(file_write)
 C:\Users\andre\Documents\GitHub\openzfs\out\build\x64-Debug\file_write.c.obj : error LNK2019: unresolved external symbol lseek64 referenced in function main]]
 add_subdirectory(get_diff)
+#[[add_subdirectory(largest_file)
+C:\Users\andre\Documents\GitHub\openzfs\tests\zfs-tests\cmd\largest_file\largest_file.c(77,16): error : use of undeclared identifier 'SIGXFSZ']]
+#[[add_subdirectory(mkbusy)]]
+#[[add_subdirectory(mkfile)]]
+
+

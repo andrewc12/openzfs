@@ -20,3 +20,13 @@ add_subdirectory(stride_dd)
 #[[add_subdirectory(rename_dir)]]
 #[[add_subdirectory(rm_lnkcnt_zero_file)]]
 add_subdirectory(threadsappend)
+#[[add_subdirectory(user_ns_exec)]]
+#[[add_subdirectory(xattrtest)]]
+#[[add_subdirectory(mmap_exec)]]
+#[[add_subdirectory(mmap_libaio)]]
+#[[add_subdirectory(mmap_seek)]]
+#[[add_subdirectory(mmapwrite)]]
+add_subdirectory(nvlist_to_lua)
+#[[add_subdirectory(randfree_file)]]
+#[[add_subdirectory(randwritecomp)]]
+#[[add_subdirectory(readmmap)]]

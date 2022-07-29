@@ -19,6 +19,7 @@
 #include <sys/btree.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <libzfs.h>
 
 #define	BUFSIZE 256
 

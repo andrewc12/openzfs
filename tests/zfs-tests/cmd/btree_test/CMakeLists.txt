@@ -1,6 +1,8 @@
 
 use_clang()
 
+add_compile_options(/FI ${CMAKE_SOURCE_DIR}/include/libzfs.h)
+
 um_add_executable(btree_test
 	 btree_test.c
 

@@ -205,6 +205,9 @@ struct rlimit {
 
 #define	strcasecmp _stricmp
 
+#define	srandom(x) srand(x)
+#define	random() rand()
+
 int nanosleep(const struct timespec *rqtp, struct timespec *rmtp);
 
 #include <sys/isa_defs.h>

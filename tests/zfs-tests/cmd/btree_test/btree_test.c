@@ -19,6 +19,13 @@
 #include <sys/btree.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <libzfs.h>
+
+
+//TODO: FIXME: find out how to do this properly on windoes
+#define	RLIMIT_CORE 256
+
+#define	RLIMIT_CORE 256
 
 #define	BUFSIZE 256
 

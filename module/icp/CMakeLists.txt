@@ -24,9 +24,9 @@ wdk_add_library(icpkern
   algs/skein/skein_port.h
   api/kcf_cipher.c
   api/kcf_ctxops.c
-  api/kcf_digest.c
+#  api/kcf_digest.c
   api/kcf_mac.c
-  api/kcf_miscapi.c
+#  api/kcf_miscapi.c
   asm-x86_64/aes/aeskey.c
   asm-x86_64/aes/aes_aesni.S
 #  asm-x86_64/aes/aes_amd64.S
@@ -50,7 +50,7 @@ wdk_add_library(icpkern
   io/skein_mod.c
   #os/bitmap_arch.c
 #  os/modconf.c
-  os/modhash.c
+#  os/modhash.c
   spi/kcf_spi.c
 )
 

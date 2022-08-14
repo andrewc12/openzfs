@@ -28,7 +28,7 @@ jobs:
       - name: configure
         run: |
           #https://stackoverflow.com/a/62591864
-          ./configure CPPFLAGS="-I/usr/local/opt/gettext/include -I/usr/local/opt/openssl@3/include" LDFLAGS="-L/usr/local/opt/gettext/lib/ -L/usr/local/opt/openssl@1.1/lib"
+          ./configure CPPFLAGS="-I/usr/local/opt/gettext/include -I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/gettext/lib/ -L/usr/local/opt/openssl@1.1/lib"
       - name: build
         run: |
           make -j 2

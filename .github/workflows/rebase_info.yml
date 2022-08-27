@@ -16,6 +16,10 @@ jobs:
       with:
         #repository: openzfsonwindows/openzfs
         fetch-depth: 0
+    
+    - run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
 
     - run: git remote add openzfs https://github.com/openzfs/zfs.git
       

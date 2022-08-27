@@ -1,0 +1,22 @@
+name: rebase_info
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v3
+      with:
+        #repository: openzfsonwindows/openzfs
+        fetch-depth: 0
+
+    - run: git remote add openzfs https://github.com/openzfs/zfs.git
+      
+    - run: git fetch --all
+      
+    - run: git rebase openzfs/master

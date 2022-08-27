@@ -1,6 +1,8 @@
 name: rebase_info
 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
 
 

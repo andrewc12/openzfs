@@ -452,13 +452,20 @@ jobs:
     #- run: C:\tools\gsudo\Current\gsudo.exe config ForceAttachedConsole true
 
 
-
+pwsh.exe -File .\hello.ps1
+#    - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
+#      timeout-minutes: 1
+#      run: |
+#          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat
+#          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" status
+#          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01
     - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
       timeout-minutes: 1
+      shell: 'C:\tools\gsudo\Current\gsudo.exe -d pwsh.exe -File {0}'
       run: |
-          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat
-          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" status
-          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" status
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01
 
     - run: Start-Sleep -Seconds 10
       timeout-minutes: 1

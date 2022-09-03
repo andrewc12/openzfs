@@ -451,17 +451,12 @@ jobs:
 
     - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
       timeout-minutes: 1
-      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat'
-    - run: Start-Sleep -Seconds 10
-      timeout-minutes: 1
+      shell: C:\tools\gsudo\Current\gsudo.exe pwsh.exe -command ". '{0}'"
+      run: |
+          '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat'
+          '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
+          '& "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01'
 
-    - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
-      timeout-minutes: 1
-    - run: Start-Sleep -Seconds 10
-      timeout-minutes: 1
-
-    - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01'
-      timeout-minutes: 1
     - run: Start-Sleep -Seconds 10
       timeout-minutes: 1
 
@@ -586,6 +581,7 @@ jobs:
     #  shell: cmd
     #- run: 'type ${{github.workspace}}\full_bkup | "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
     #  shell: cmd
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" list -t snapshot'
 
     - run: |
         ls ${{ steps.test_send_drive.outputs.drive }}

@@ -452,7 +452,6 @@ jobs:
     #- run: C:\tools\gsudo\Current\gsudo.exe config ForceAttachedConsole true
 
 
-pwsh.exe -File .\hello.ps1
 #    - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
 #      timeout-minutes: 1
 #      run: |

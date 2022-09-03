@@ -582,6 +582,7 @@ jobs:
     #- run: 'type ${{github.workspace}}\full_bkup | "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
     #  shell: cmd
 
+
     - run: |
         $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1" -Algorithm "SHA256"
         $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile1" -Algorithm "SHA256"

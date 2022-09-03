@@ -463,6 +463,16 @@ jobs:
     - run: Start-Sleep -Seconds 10
       timeout-minutes: 1
 
+
+    - run: |
+        import os
+        stream = os.popen('"C:\Program Files\OpenZFS On Windows\zpool.exe" status')
+        output = stream.read()
+        print(output)
+    - shell: "C:\tools\gsudo\Current\gsudo.exe" -d python3
+
+
+
     - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test02 \\?\${{github.workspace}}\test01.dat \\?\${{github.workspace}}\test02.dat'
       timeout-minutes: 1
     - run: Start-Sleep -Seconds 10

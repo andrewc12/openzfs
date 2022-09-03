@@ -455,11 +455,10 @@ jobs:
 
     - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
       timeout-minutes: 1
-      #shell: C:\tools\gsudo\Current\gsudo.exe -d -w pwsh.exe -command ". '{0}'"
       run: |
           & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat
           & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" status
-          '& "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01'
+          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01'
 
     - run: Start-Sleep -Seconds 10
       timeout-minutes: 1
@@ -573,12 +572,12 @@ jobs:
     - run: Start-Sleep -Seconds 10
 
     - run: |
-        '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
-      shell: C:\tools\gsudo\Current\gsudo.exe pwsh.exe -command ". '{0}'"
+         "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup
+      shell: cmd
     - run: Start-Sleep -Seconds 10
     - run: |
-        'Get-Content ${{github.workspace}}\full_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
-      shell: C:\tools\gsudo\Current\gsudo.exe pwsh.exe -command ". '{0}'"
+        type ${{github.workspace}}\full_bkup |  "C:\tools\gsudo\Current\gsudo.exe" -d  "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap
+      shell: cmd
     #- run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
     #  shell: cmd
     #- run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'

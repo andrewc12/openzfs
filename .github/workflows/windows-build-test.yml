@@ -574,11 +574,11 @@ jobs:
     - run: Start-Sleep -Seconds 10
 
     - run: |
-      '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
+        '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
       shell: C:\tools\gsudo\Current\gsudo.exe pwsh.exe -command ". '{0}'"
     - run: Start-Sleep -Seconds 10
     - run: |
-      'Get-Content ${{github.workspace}}\full_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
+        'Get-Content ${{github.workspace}}\full_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
       shell: C:\tools\gsudo\Current\gsudo.exe pwsh.exe -command ". '{0}'"
     #- run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
     #  shell: cmd

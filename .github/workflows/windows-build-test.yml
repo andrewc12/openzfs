@@ -569,25 +569,37 @@ jobs:
     - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" create testpool/rst_ctr'
     - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1", $out)'
     - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@init_snap'
-    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
-    - run: 'Get-Content ${{github.workspace}}\full_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
+    #- run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
+    #- run: 'Get-Content ${{github.workspace}}\full_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
+    - run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
+      shell: cmd
+    #- run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
+    #  shell: cmd
+    #- run: 'type ${{github.workspace}}\full_bkup | "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap'
+    #  shell: cmd
+
     - run: |
         $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1" -Algorithm "SHA256"
         $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile1" -Algorithm "SHA256"
 
-        # Compare the hashes & note this in the log
-        $hashSrc.Hash -ne $hashDest.Hash
-    - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2", $out)'
-    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@inc_snap'
-    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send -i testpool/testfs@init_snap testpool/testfs@inc_snap > ${{github.workspace}}\inc_bkup'
-    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" rollback testpool/rst_ctr/testfs@init_snap'
-    - run: 'Get-Content ${{github.workspace}}\inc_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@inc_snap'
-    - run: |
-        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2" -Algorithm "SHA256"
-        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile2" -Algorithm "SHA256"
-
-        # Compare the hashes & note this in the log
-        $hashSrc.Hash -ne $hashDest.Hash
+#        # Compare the hashes & note this in the log
+#        $hashSrc.Hash -ne $hashDest.Hash
+#    - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2", $out)'
+#    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@inc_snap'
+#    #- run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send -i testpool/testfs@init_snap testpool/testfs@inc_snap > ${{github.workspace}}\inc_bkup'
+#    - run: '"C:\Program Files\OpenZFS On Windows\zfs.exe" send -i testpool/testfs@init_snap testpool/testfs@inc_snap > ${{github.workspace}}\inc_bkup'
+#      shell: cmd
+#    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" rollback testpool/rst_ctr/testfs@init_snap'
+#    #- run: 'Get-Content ${{github.workspace}}\inc_bkup | & "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@inc_snap'
+#    - run: 'type ${{github.workspace}}\inc_bkup | "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@inc_snap'
+#      shell: cmd
+#
+#    - run: |
+#        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2" -Algorithm "SHA256"
+#        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile2" -Algorithm "SHA256"
+#
+#        # Compare the hashes & note this in the log
+#        $hashSrc.Hash -ne $hashDest.Hash
 
 
 

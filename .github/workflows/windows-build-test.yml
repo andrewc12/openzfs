@@ -449,7 +449,7 @@ jobs:
 
     - run: choco install gsudo
 
-    - run: C:\tools\gsudo\Current\gsudo.exe config ForceAttachedConsole true
+    #- run: C:\tools\gsudo\Current\gsudo.exe config ForceAttachedConsole true
 
 
 

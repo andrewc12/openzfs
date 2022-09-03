@@ -449,6 +449,10 @@ jobs:
 
     - run: choco install gsudo
 
+    - run: C:\tools\gsudo\Current\gsudo.exe config ForceAttachedConsole true
+
+
+
     - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
       timeout-minutes: 1
       shell: C:\tools\gsudo\Current\gsudo.exe -d -w pwsh.exe -command ". '{0}'"

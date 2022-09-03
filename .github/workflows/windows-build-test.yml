@@ -460,7 +460,7 @@ jobs:
 #          & "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01
     - name: tests/functional/cli_root/zpool_create/zpool_create_001_pos
       timeout-minutes: 1
-      shell: 'C:\tools\gsudo\Current\gsudo.exe -d pwsh.exe -File {0}'
+      shell: C:\tools\gsudo\Current\gsudo.exe -d pwsh.exe  -command ". '{0}'"
       run: |
           & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test01 \\?\${{github.workspace}}\test01.dat
           & "C:\Program Files\OpenZFS On Windows\zpool.exe" status

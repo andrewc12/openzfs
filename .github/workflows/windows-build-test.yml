@@ -568,7 +568,9 @@ jobs:
 
     - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" create testpool/rst_ctr'
     - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1", $out)'
+
     - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@init_snap'
+
     - run: Start-Sleep -Seconds 10
 
     - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'

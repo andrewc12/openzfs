@@ -543,7 +543,51 @@ jobs:
 
 
 
+    - name: Create backing files
+      run: |
+          $f = new-object System.IO.FileStream ${{github.workspace}}\test_send_01.dat, Create, ReadWrite
+          $f.SetLength(1GB)
+          $f.Close()
 
+    - name: create pool
+      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create testpool \\?\${{github.workspace}}\test_send_01.dat'
+
+    - name: get pool status
+      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
+
+    - name: get pool mount
+      run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" mount'
+
+    - name: get pool mount
+      id: test_send_drive  # Remember to give an ID if you need the output filename
+      run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe"  mount | Select-String -Pattern "^testpool +([A-Za-z]:\\)"  | % {"::set-output name=drive::$($_.matches.groups[1].value)"}'
+
+
+    - name: tests/functional/cli_root/zfs_send/zpool_send_001_pos
+      run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" create testpool/testfs'
+
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" create testpool/rst_ctr'
+    - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1", $out)'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@init_snap'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap <${{github.workspace}}\full_bkup'
+    - run: |
+        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1" -Algorithm "SHA256"
+        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile1" -Algorithm "SHA256"
+
+        # Compare the hashes & note this in the log
+        $hashSrc.Hash -ne $hashDest.Hash
+    - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2", $out)'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@inc_snap'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send -i testpool/testfs@init_snap testpool/testfs@inc_snap > ${{github.workspace}}\inc_bkup'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" rollback testpool/rst_ctr/testfs@init_snap'
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@inc_snap <${{github.workspace}}\full_bkup'
+    - run: |
+        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2" -Algorithm "SHA256"
+        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile2" -Algorithm "SHA256"
+
+        # Compare the hashes & note this in the log
+        $hashSrc.Hash -ne $hashDest.Hash
 
 
 

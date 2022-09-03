@@ -587,11 +587,11 @@ jobs:
 
 
     - run: |
-        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/testfs/testfile1" -Algorithm "SHA256"
-        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}/rst_ctr/testfs/testfile1" -Algorithm "SHA256"
-
-#        # Compare the hashes & note this in the log
-#        $hashSrc.Hash -ne $hashDest.Hash
+        $hashSrc = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}\testfs\testfile1" -Algorithm "SHA256"
+        $hashDest = Get-FileHash "${{ steps.test_send_drive.outputs.drive }}\rst_ctr\testfs\testfile1" -Algorithm "SHA256"
+        # Compare the hashes & note this in the log
+        $hashSrc.Hash -ne $hashDest.Hash
+        ls ${{ steps.test_send_drive.outputs.drive }}
 #    - run: '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/testfs/testfile2", $out)'
 #    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" snapshot testpool/testfs@inc_snap'
 #    #- run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" send -i testpool/testfs@init_snap testpool/testfs@inc_snap > ${{github.workspace}}\inc_bkup'

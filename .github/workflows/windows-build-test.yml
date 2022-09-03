@@ -582,7 +582,8 @@ jobs:
     - run: Start-Sleep -Seconds 10
 
     - run: |
-         "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap |  "C:\tools\gsudo\Current\gsudo.exe" -d  "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap
+         "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap | zstd -z -o a.zstd
+         zstd -dcf a.zstd | "C:\tools\gsudo\Current\gsudo.exe" -d  "C:\Program Files\OpenZFS On Windows\zfs.exe" receive testpool/rst_ctr/testfs@init_snap
       shell: cmd
           #     "C:\tools\gsudo\Current\gsudo.exe" -d "C:\Program Files\OpenZFS On Windows\zfs.exe" send testpool/testfs@init_snap > ${{github.workspace}}\full_bkup
     #  shell: cmd

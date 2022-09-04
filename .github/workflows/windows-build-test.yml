@@ -609,6 +609,12 @@ jobs:
 
 
 
+    - name: test keyfile
+      timeout-minutes: 1
+      run: |
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" export tank
+
+
 
 
 

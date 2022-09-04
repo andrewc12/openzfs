@@ -536,7 +536,7 @@ jobs:
     - name: create keyfile
       timeout-minutes: 1
       run: |
-          '$out = new-object byte[] 32; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/file1.key", $out)'
+          '$out = new-object byte[] 32; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{github.workspace}/file1.key", $out)'
 
 
     - name: test keyfile

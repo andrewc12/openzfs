@@ -541,10 +541,20 @@ jobs:
           [IO.File]::WriteAllBytes("${{github.workspace}}\file1.key", $out)
 
 
+    - name: get keypath
+      id: keypath
+      run: |
+        $p = "file:////?/${{github.workspace}}/file1.key"
+        echo $p
+        $f = $p  -replace '\\','/'
+        echo $f
+        echo "::set-output name=keypath::$($f)"
+
+
     - name: test keyfile
       timeout-minutes: 1
       run: |
-          & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation="file:////?/{'${{github.workspace}}' -replace '\\','/'}/file1.key" -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
+          & '"C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation=${{ steps.keypath.outputs.keypath }} -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat'
 
 
 

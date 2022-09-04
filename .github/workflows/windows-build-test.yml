@@ -536,13 +536,13 @@ jobs:
     - name: create keyfile
       timeout-minutes: 1
       run: |
-          '$out = new-object byte[] 32; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{github.workspace}/file1.key", $out)'
+          '$out = new-object byte[] 32; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("$C:\file1.key", $out)'
 
 
     - name: test keyfile
       timeout-minutes: 1
       run: |
-          & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation=file:////?/${{github.workspace}}/file1.key -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation=file:////?/C:/file1.key -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
 
 
 

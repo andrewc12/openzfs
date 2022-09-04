@@ -552,25 +552,59 @@ jobs:
 
 
     - name: test keyfile
+      id: keydrive
       timeout-minutes: 1
       run: |
           & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation=${{ steps.keypath.outputs.keypath }} -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
+          '& "C:\Program Files\OpenZFS On Windows\zfs.exe"  mount | Select-String -Pattern "^tank +([A-Za-z]:\\)"  | % {"::set-output name=drive::$($_.matches.groups[1].value)"}'
+
+    - name: echo
+      run: echo ${{ steps.keydrive.outputs.drive }}
+
+
+
+
+    - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
+      timeout-minutes: 1
+    - run: Start-Sleep -Seconds 10
+      timeout-minutes: 1
+
+
+
+
+    - run: |
+        '$out = new-object byte[] 4096; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.keydrive.outputs.drive }}\testfile1", $out)'
+        $hashSrc = Get-FileHash "${{ steps.keydrive.outputs.drive }}\testfile1" -Algorithm "SHA256"
+        $hashSrc.Hash
+
+
+
+    - name: test keyfile
+      id: keydrive
+      timeout-minutes: 1
+      run: |
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" export tank
 
 
 
 
 
+    - name: test keyfile
+      id: keydrive2
+      timeout-minutes: 1
+      run: |
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" import -f -O encryption=aes-256-ccm -O keylocation=${{ steps.keypath.outputs.keypath }} -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
+          '& "C:\Program Files\OpenZFS On Windows\zfs.exe"  mount | Select-String -Pattern "^tank +([A-Za-z]:\\)"  | % {"::set-output name=drive::$($_.matches.groups[1].value)"}'
+
+
+    - name: echo
+      run: echo ${{ steps.keydrive2.outputs.drive }}
 
 
 
-
-
-
-
-
-
-
-
+    - run: |
+        $hashSrc = Get-FileHash "${{ steps.keydrive2.outputs.drive }}\testfile1" -Algorithm "SHA256"
+        $hashSrc.Hash
 
 
 

@@ -580,7 +580,6 @@ jobs:
 
 
     - name: test keyfile
-      id: keydrive
       timeout-minutes: 1
       run: |
           & "C:\Program Files\OpenZFS On Windows\zpool.exe" export tank

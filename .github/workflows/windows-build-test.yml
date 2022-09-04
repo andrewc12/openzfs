@@ -526,6 +526,24 @@ jobs:
       timeout-minutes: 1
 
 
+    - name: Create backing files
+      run: |
+          $f = new-object System.IO.FileStream ${{github.workspace}}\test_key_01.dat, Create, ReadWrite
+          $f.SetLength(1GB)
+          $f.Close()
+
+
+    - name: create keyfile
+      timeout-minutes: 1
+      run: |
+          '$out = new-object byte[] 32; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("${{ steps.test_send_drive.outputs.drive }}/file1.key", $out)'
+
+
+    - name: test keyfile
+      timeout-minutes: 1
+      run: |
+          & "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f -O encryption=aes-256-ccm -O keylocation=file:////?/${{github.workspace}}/file1.key -O keyformat=raw tank \\?\${{github.workspace}}\test_key_01.dat
+
 
 
 

@@ -88,6 +88,29 @@ If your version of .NET newer, just move along.
 
 The Target VM should reboot, and login as "WDKRemoteUser".
 
+
+
+
+### Host - Install OpenZFS test certificate
+From https://github.com/andrewc12/openzfs/tree/andrew_devvm01/contrib/windows/TestCert
+- Install `test_sign_cert_nopass.pfx` (password: )
+ - Certificate should be installed into
+   1. "Personal" in "Current User"
+
+### Target - Install OpenZFS test certificate
+
+From https://github.com/andrewc12/openzfs/tree/andrew_devvm01/contrib/windows/TestCert
+- Install `test_sign_cert_nopass.pfx` (password: )
+ - Certificate should be installed into
+   1. "Trusted Root Certification Authority" in "Local Computer" (not current user) *and*
+   2. "Trusted Publishers" in "Local Computer" (not current user)
+- Enable test signing (this should already be enabled)
+  - `> bcdedit.exe /set TESTSIGNING ON`
+  - reboot the system to apply
+
+
+---
+
 It is recommended you get GIT bash for Windows and install:
 
 https://git-scm.com/downloads

@@ -152,11 +152,13 @@ File -> Open -> Folder
 
 and open the top source folder. Hit build when ready.
 
-It is expected of you to set the environment variables
+It was previously expected of you to set the environment variables
 (either globally, or in your CMakeSettings.json)
 		${OPENZFS_SIGNTOOL_CERTSTORE}
 		${OPENZFS_SIGNTOOL_SHA1}
 		${OPENZFS_SIGNTOOL_TSA}
+
+but theae now default to the test signing certificate
 
 Only the top `driver.c` is compiled using MSVC, and the
 linking of OpenZFS.sys.

@@ -16,10 +16,12 @@ and create two VMs.
 
 The VM images comes with Visual Studio 2022, which we use to compile the driver.
 
+### Host + Target - Static IP
 It is recommended that the VMs are placed on static IP, as they can
 change IP with all the crashes, and you have to configure the remote
 kernel development again.
 
+### Host + Target - Windows Driver Kit 11
 Go download the Windows Driver Kit 11
 
 https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit
@@ -30,6 +32,7 @@ It will update the already installed Visual Studio.
 Then install the WDK. At the end of the installer, allow it to install the Visual Studio extension.
 
 
+### Target - Provision Target
 On Target VM, complete the guide specified here, under
 section "Prepare the target computer for provisioning".
 
@@ -37,13 +40,14 @@ https://msdn.microsoft.com/windows/hardware/drivers/gettingstarted/provision-a-t
 
 Which mostly entails running:
 
-Disable Secure Boot.
+* Disable Secure Boot.
 
-C:\Program Files (x86)\Windows Kits\10\Remote\x64\WDK Test Target Setup x64-x64_en-us.msi
+* C:\Program Files (x86)\Windows Kits\10\Remote\x64\WDK Test Target Setup x64-x64_en-us.msi
 
 * reboot Target VM
 
 
+### Host - Setup extension to connect to target
 On the Host VM, continue the guide to configure Visual Studio.
 
 * Load Visual Studio, there is no need to load the project yet.

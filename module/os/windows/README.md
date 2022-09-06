@@ -110,6 +110,7 @@ From https://github.com/andrewc12/openzfs/tree/andrew_devvm01/contrib/windows/Te
 
 
 ---
+### Host + Target - GIT BASH Shell
 
 It is recommended you get GIT bash for Windows and install:
 

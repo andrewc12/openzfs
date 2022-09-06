@@ -158,7 +158,7 @@ It was previously expected of you to set the environment variables
 		${OPENZFS_SIGNTOOL_SHA1}
 		${OPENZFS_SIGNTOOL_TSA}
 
-but theae now default to the test signing certificate
+but these now default to the test signing certificate
 
 Only the top `driver.c` is compiled using MSVC, and the
 linking of OpenZFS.sys.
@@ -213,8 +213,8 @@ wait a while, for Visual Studio to deploy the .sys file on Target and start it.
 
 Deploying manually
 !!!! andrews notes
-install oppenzfs on target
-on hkat with VS attach in kernel debug mode to target
+install openzfs on target
+on host with VS attach in kernel debug mode to target
 
 
 

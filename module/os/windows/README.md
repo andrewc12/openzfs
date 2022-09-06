@@ -211,6 +211,18 @@ wait a while, for Visual Studio to deploy the .sys file on Target and start it.
 
 
 
+Deploying manually
+!!!! andrews notes
+install oppenzfs on target
+on hkat with VS attach in kernel debug mode to target
+
+
+
+
+
+
+
+
 Target VM optionals.
 
 If you find it frustrating to do development work when Windows Defender or

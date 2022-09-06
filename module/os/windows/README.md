@@ -178,7 +178,7 @@ libraries.
 ---
 
 
-Deploying with Visual Studio.
+# Deploying with Visual Studio.
 
 If you wish to use Visual Studio to deploy, and debug, against
 remote Windows kernel. You can load the
@@ -216,7 +216,7 @@ wait a while, for Visual Studio to deploy the .sys file on Target and start it.
 
 
 
-Deploying manually
+# Deploying manually
 !!!! andrews notes
 install openzfs on target
 on host with VS attach in kernel debug mode to target

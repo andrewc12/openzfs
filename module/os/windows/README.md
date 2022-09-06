@@ -132,7 +132,7 @@ you probably want to change ARM ==> X64.
 
 
 # Compilling with Visual Studio.
-### install Clang and CMake
+### Install Clang and CMake
 Currently OpenZFS is compiled using CMake. The easiest
 way to do so is with Visual Studio. You will need to
 enable "clang" support, as well as Spectre libraries in

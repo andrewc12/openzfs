@@ -130,6 +130,9 @@ you probably want to change ARM ==> X64.
 
 ---
 
+
+# Compilling with Visual Studio.
+### install Clang and CMake
 Currently OpenZFS is compiled using CMake. The easiest
 way to do so is with Visual Studio. You will need to
 enable "clang" support, as well as Spectre libraries in
@@ -144,14 +147,16 @@ Add individual components:
 * MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (v14.33-17.3)
 
 
+### Install OpenSSL
+You will need to download OpenSSL for Windows:
+Non-Light version recommended for Developers. Install to openssl/bin.
+https://slproweb.com/products/Win32OpenSSL.html
 
-
-
-
+### Configure Project
 Open Visual Studio 2019 (As of Nov 2020)
 File -> Open -> Folder
 
-and open the top source folder. Hit build when ready.
+and open the top source folder.
 
 It was previously expected of you to set the environment variables
 (either globally, or in your CMakeSettings.json)
@@ -161,6 +166,10 @@ It was previously expected of you to set the environment variables
 
 but these now default to the test signing certificate
 
+Hit build when ready.
+
+
+
 Only the top `driver.c` is compiled using MSVC, and the
 linking of OpenZFS.sys.
 All other files are compiled using clang, and linked into
@@ -168,11 +177,6 @@ libraries.
 
 ---
 
-You will need to download OpenSSL for Windows:
-Non-Light version recommended for Developers. Install to openssl/bin.
-https://slproweb.com/products/Win32OpenSSL.html
-
----
 
 Deploying with Visual Studio.
 

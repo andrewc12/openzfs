@@ -5,7 +5,7 @@
 # To setup a development environment for compiling ZFS.
 
 
-Download free development Windows 10 image from Microsoft.
+Download free development Windows 11 image from Microsoft.
 
 https://developer.microsoft.com/en-us/windows/downloads/virtual-machines
 
@@ -14,18 +14,18 @@ and create two VMs.
 * Host (running Visual Studio and Kernel Debugger)
 * Target (runs the compiled kernel module)
 
-The VM images comes with Visual Studio 2017, which we use to compile the driver.
+The VM images comes with Visual Studio 2022, which we use to compile the driver.
 
 It is recommended that the VMs are placed on static IP, as they can
 change IP with all the crashes, and you have to configure the remote
 kernel development again.
 
-Go download the Windows Driver Kit 10
+Go download the Windows Driver Kit 11
 
 https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit
 
 and install on both VMs. You will need both the SDK and WDK:
-Download the SDK with the Visual Studio 2017 community edition first and install it.
+Download the SDK with the Visual Studio 2022 community edition first and install it.
 It will update the already installed Visual Studio.
 Then install the WDK. At the end of the installer, allow it to install the Visual Studio extension.
 
@@ -36,6 +36,8 @@ section "Prepare the target computer for provisioning".
 https://msdn.microsoft.com/windows/hardware/drivers/gettingstarted/provision-a-target-computer-wdk-8-1?f=255&MSPPError=-2147217396
 
 Which mostly entails running:
+
+Disable Secure Boot.
 
 C:\Program Files (x86)\Windows Kits\10\Remote\x64\WDK Test Target Setup x64-x64_en-us.msi
 
@@ -88,23 +90,6 @@ https://git-scm.com/downloads
 
 ---
 
-Handling configuration errors with Visual Studio 2019 & WDK 10:
-
-There are some issues with Visual Studio 2019 which can cause the following problem in setting up kernel debugging. 
-ERROR: Task “Configuring kernel debugger settings (possible reboot)” failed to complete successfully. Look at the logs in the driver test group explorer for more details on the failure.
-
-This problem is related to MSVC debug tool location mismatch, and as a workaround use the following steps to mitigate this problem:
-
-As Administrator, run Developer Command Prompt for VS 2019 in your Host VM
-Run the following commands in the VS Developer Command Prompt:
-
-cd /d %VCToolsRedistDir%\debug_nonredist
-MKLINK /J x86\Microsoft.VC141.DebugCRT x86\Microsoft.VC142.DebugCRT
-MKLINK /J x64\Microsoft.VC141.DebugCRT x64\Microsoft.VC142.DebugCRT
-
-Retry configuration by following guide to configure Visual Studio mentioned above.
-
----
 
 
 Host and Target VMs are now configured.
@@ -126,9 +111,13 @@ Add individual components:
 (Versions refer to what was available at the time)
 
 * C++ Cmake tools for Windows
-* C++ Clang Compiler for Windows (10.0.0)
-* C++ Clang-cl for v142 build tools (x64/x86)
-* MSVC v142 - VS 2019 C++ x64/x86 Spectre-mitigated libs (v14.28)
+* C++ Clang Compiler for Windows (14.0.5)
+* C++ Clang-cl for v143 build tools (x64/x86)
+* MSVC v143 - VS 2022 C++ x64/x86 Spectre-mitigated libs (v14.33-17.3)
+
+
+
+
 
 
 Open Visual Studio 2019 (As of Nov 2020)

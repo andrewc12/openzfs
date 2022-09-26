@@ -61,12 +61,12 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -G "Ninja" -B ${{github.workspace}}/out/build/x64-Debug ${{github.workspace}}  -DOPENSSL_ROOT_DIR=${{github.workspace}}/openssl/ -DCRYPTO_STATIC_TEST=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MTd.lib -DLIB_EAY_DEBUG=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MTd.lib -DLIB_EAY_RELEASE=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MT.lib -DOPENSSL_INCLUDE_DIR=${{github.workspace}}/openssl/include -DSSL_EAY_DEBUG=${{github.workspace}}/openssl/lib/VC/static/libssl64MTd.lib -DSSL_EAY_RELEASE=${{github.workspace}}/openssl/lib/VC/static/libssl64MT.lib
+      run: cmake -G "Ninja" -B ${{github.workspace}}/out/build/x64-Release ${{github.workspace}}  -DOPENSSL_ROOT_DIR=${{github.workspace}}/openssl/ -DCRYPTO_STATIC_TEST=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MTd.lib -DLIB_EAY_DEBUG=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MTd.lib -DLIB_EAY_RELEASE=${{github.workspace}}/openssl/lib/VC/static/libcrypto64MT.lib -DOPENSSL_INCLUDE_DIR=${{github.workspace}}/openssl/include -DSSL_EAY_DEBUG=${{github.workspace}}/openssl/lib/VC/static/libssl64MTd.lib -DSSL_EAY_RELEASE=${{github.workspace}}/openssl/lib/VC/static/libssl64MT.lib
 
     - name: Build
-      working-directory: ${{github.workspace}}/out/build/x64-Debug
+      working-directory: ${{github.workspace}}/out/build/x64-Release
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/out/build/x64-Debug
+      run: cmake --build ${{github.workspace}}/out/build/x64-Release
 
     - name: debug - get git rev
       run: git describe --always --long --dirty
@@ -131,13 +131,13 @@ jobs:
       if: ${{ failure() }}
       run: |
         mkdir ${{github.workspace}}/zfs_collect
-        copy ${{github.workspace}}/out/build/x64-Debug/module/os/windows/driver/* ${{github.workspace}}/zfs_collect
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/os/windows/kstat/kstat.exe ${{github.workspace}}/zfs_collect/kstat.exe
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/os/windows/zfsinstaller/zfsinstaller.exe ${{github.workspace}}/zfs_collect/zfsinstaller.exe
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/zdb/zdb.exe ${{github.workspace}}/zfs_collect/zdb.exe
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/zfs/zfs.exe ${{github.workspace}}/zfs_collect/zfs.exe
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/zpool/zpool.exe ${{github.workspace}}/zfs_collect/zpool.exe
-        copy ${{github.workspace}}/out/build/x64-Debug/cmd/zstream/zstreamdump.exe ${{github.workspace}}/zfs_collect/zstreamdump.exe
+        copy ${{github.workspace}}/out/build/x64-Release/module/os/windows/driver/* ${{github.workspace}}/zfs_collect
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/os/windows/kstat/kstat.exe ${{github.workspace}}/zfs_collect/kstat.exe
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/os/windows/zfsinstaller/zfsinstaller.exe ${{github.workspace}}/zfs_collect/zfsinstaller.exe
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/zdb/zdb.exe ${{github.workspace}}/zfs_collect/zdb.exe
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/zfs/zfs.exe ${{github.workspace}}/zfs_collect/zfs.exe
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/zpool/zpool.exe ${{github.workspace}}/zfs_collect/zpool.exe
+        copy ${{github.workspace}}/out/build/x64-Release/cmd/zstream/zstreamdump.exe ${{github.workspace}}/zfs_collect/zstreamdump.exe
 
     - name: Upload dev build
       if: ${{ failure() }}

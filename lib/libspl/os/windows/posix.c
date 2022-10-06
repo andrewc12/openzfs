@@ -1156,6 +1156,7 @@ wosix_isatty(int fd)
 				nameinfo->FileName[nameinfo->FileNameLength /
 				    sizeof (WCHAR)] = L'\0';
 				p = nameinfo->FileName;
+				(void) fprintf(stderr, "%s", p);
 				if (is_wprefix(p, L"\\cygwin-")) {
 					p += 8;
 				} else if (is_wprefix(p, L"\\msys-")) {

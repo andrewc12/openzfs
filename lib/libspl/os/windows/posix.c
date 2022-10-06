@@ -1134,15 +1134,23 @@ wosix_isatty(int fd)
 	HANDLE h = ITOH(fd);
 	int ret;
 
+	(void) fprintf(stderr, "wosix_isatty\n");
 	// First, check if we are in a regular dos box, if yes, return.
 	// If not, check for cygwin ...
 	// check for mingw ...
 	// check for powershell ...
-	if (GetConsoleMode(h, &mode))
+
+	ret = GetConsoleMode(h, &mode);
+	(void) fprintf(stderr, "gcm %d 0x%X\n", ret, mode);
+	if (ret){
+		(void) fprintf(stderr, "in gcm\n");
 		return (1);
+	}
 
 	// Not CMDbox, check mingw
+	(void) fprintf(stderr, "before gft 0x%X\n", GetFileType(h));
 	if (GetFileType(h) == FILE_TYPE_PIPE) {
+		(void) fprintf(stderr, "in gft\n");
 
 		int size = sizeof (FILE_NAME_INFO) +
 		    sizeof (WCHAR) * (MAX_PATH - 1);
@@ -1151,11 +1159,14 @@ wosix_isatty(int fd)
 
 		nameinfo = malloc(size + sizeof (WCHAR));
 		if (nameinfo != NULL) {
-			if (GetFileInformationByHandleEx(h, FileNameInfo,
-			    nameinfo, size)) {
+			(void) fprintf(stderr, "in nameinfo\n");
+			ret = GetFileInformationByHandleEx(h, FileNameInfo, nameinfo, size);
+			(void) fprintf(stderr, "GetFileInformationByHandleEx %d\n", ret);
+			if (ret) {
 				nameinfo->FileName[nameinfo->FileNameLength /
 				    sizeof (WCHAR)] = L'\0';
 				p = nameinfo->FileName;
+				(void) fprintf(stderr, "%s", p);
 				if (is_wprefix(p, L"\\cygwin-")) {
 					p += 8;
 				} else if (is_wprefix(p, L"\\msys-")) {
@@ -1184,6 +1195,10 @@ wosix_isatty(int fd)
 						p = NULL;
 					}
 				}
+			}
+			else
+			{
+				(void) fprintf(stderr, "error %u\n", GetLastError());
 			}
 			free(nameinfo);
 			if (p != NULL)

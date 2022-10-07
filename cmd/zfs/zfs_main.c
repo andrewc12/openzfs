@@ -4580,13 +4580,14 @@ zfs_do_send(int argc, char **argv)
 		    gettext("Error: raw sends may not be redacted.\n"));
 		return (1);
 	}
-
+/*
 	if (!flags.dryrun && isatty(STDOUT_FILENO)) {
 		(void) fprintf(stderr,
 		    gettext("Error: Stream can not be written to a terminal.\n"
 		    "You must redirect standard output.\n"));
 		return (1);
 	}
+*/
 
 	if (flags.saved) {
 		zhp = zfs_open(g_zfs, argv[0], ZFS_TYPE_DATASET);

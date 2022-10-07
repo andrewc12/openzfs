@@ -830,6 +830,7 @@ dump_ioctl(zfs_handle_t *zhp, const char *fromsnap, uint64_t fromsnap_obj,
 		char errbuf[ERRBUFLEN];
 		int error = errno;
 
+		(void) fprintf(stderr, "dump_ioctl\n");
 		(void) snprintf(errbuf, sizeof (errbuf), "%s '%s'",
 		    dgettext(TEXT_DOMAIN, "warning: cannot send"),
 		    zhp->zfs_name);
@@ -1851,6 +1852,7 @@ zfs_send_resume_impl_cb_impl(libzfs_handle_t *hdl, sendflags_t *flags,
 			return (-1);
 
 		char errbuf[ERRBUFLEN];
+		(void) fprintf(stderr, "zfs_send_resume_impl_cb_impl\n");
 		(void) snprintf(errbuf, sizeof (errbuf), dgettext(TEXT_DOMAIN,
 		    "warning: cannot send '%s'"), zhp->zfs_name);
 
@@ -2086,6 +2088,8 @@ send_prelim_records(zfs_handle_t *zhp, const char *from, int fd,
 	const char *tosnap = "";
 
 	char errbuf[ERRBUFLEN];
+
+	(void) fprintf(stderr, "send_prelim_records\n");
 	(void) snprintf(errbuf, sizeof (errbuf), dgettext(TEXT_DOMAIN,
 	    "warning: cannot send '%s'"), zhp->zfs_name);
 	if (zhp->zfs_type == ZFS_TYPE_FILESYSTEM && zfs_prop_get_int(zhp,
@@ -2534,6 +2538,7 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 	progress_arg_t pa = { 0 };
 
 	char errbuf[ERRBUFLEN];
+	(void) fprintf(stderr, "zfs_send_one_cb_impl\n");
 	(void) snprintf(errbuf, sizeof (errbuf), dgettext(TEXT_DOMAIN,
 	    "warning: cannot send '%s'"), name);
 
@@ -2550,6 +2555,8 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 		}
 		zfs_close(from_zhp);
 	}
+
+	(void) fprintf(stderr, "__FILE__ __LINE__ __func__\n");
 
 	if (redactbook != NULL) {
 		char bookname[ZFS_MAX_DATASET_NAME_LEN];
@@ -2610,7 +2617,8 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 		if (err != 0)
 			return (err);
 	}
-
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "err=%X\n", err);
 	/*
 	 * Perform size estimate if verbose was specified.
 	 */
@@ -2620,7 +2628,8 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 		if (err != 0)
 			return (err);
 	}
-
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "err=%X\n", err);
 	if (flags->dryrun)
 		return (0);
 
@@ -2643,10 +2652,12 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 			    EZFS_THREADCREATEFAILED, errbuf));
 		}
 	}
-
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "err=%X\n", err);
 	err = lzc_send_redacted(name, from, fd,
 	    lzc_flags_from_sendflags(flags), redactbook);
-
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "err=%X\n", err);
 	if (flags->progress && send_progress_thread_exit(hdl, ptid))
 			return (-1);
 
@@ -2656,6 +2667,8 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 		if (err != 0)
 			return (zfs_standard_error(hdl, err, errbuf));
 	}
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "err=%X\n", err);
 	if (err != 0) {
 		switch (errno) {
 		case EXDEV:
@@ -2695,6 +2708,8 @@ zfs_send_one_cb_impl(zfs_handle_t *zhp, const char *from, int fd,
 		case EPIPE:
 		case ERANGE:
 		case EROFS:
+			fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+			fprintf(stderr, "err=%X\n", err);
 			zfs_error_aux(hdl, "%s", strerror(errno));
 			return (zfs_error(hdl, EZFS_BADBACKUP, errbuf));
 

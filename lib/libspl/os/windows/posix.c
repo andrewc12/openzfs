@@ -1195,6 +1195,10 @@ wosix_isatty(int fd)
 					}
 				}
 			}
+			else
+			{
+				(void) fprintf(stderr, "error %u\n", GetLastError());
+			}
 			free(nameinfo);
 			if (p != NULL)
 				return (2);

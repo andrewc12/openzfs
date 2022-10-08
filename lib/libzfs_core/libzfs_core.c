@@ -207,6 +207,7 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 
 	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 	fprintf(stderr, "error=%X\n", error);
+	fprintf(stderr, "errno=%X\n", errno);
 
 	if (resultp != NULL) {
 		*resultp = NULL;
@@ -226,6 +227,10 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 		}
 	}
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "error=%X\n", error);
+	fprintf(stderr, "errno=%X\n", errno);
+
 	while (lzc_ioctl_fd(g_fd, ioc, &zc) != 0) {
 		/*
 		 * If ioctl exited with ENOMEM, we retry the ioctl after
@@ -234,6 +239,8 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 		 * Channel programs that exit with ENOMEM ran over the
 		 * lua memory sandbox; they should not be retried.
 		 */
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+		fprintf(stderr, "errno=%X\n", errno);
 		if (errno == ENOMEM && resultp != NULL &&
 		    ioc != ZFS_IOC_CHANNEL_PROGRAM) {
 			free((void *)(uintptr_t)zc.zc_nvlist_dst);

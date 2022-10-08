@@ -205,6 +205,9 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 		zc.zc_nvlist_src_size = size;
 	}
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "error=%X\n", error);
+
 	if (resultp != NULL) {
 		*resultp = NULL;
 		if (ioc == ZFS_IOC_CHANNEL_PROGRAM) {
@@ -217,6 +220,8 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 		    malloc(zc.zc_nvlist_dst_size);
 		if (zc.zc_nvlist_dst == (uint64_t)0) {
 			error = ENOMEM;
+			fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+			fprintf(stderr, "error=%X\n", error);
 			goto out;
 		}
 	}
@@ -237,10 +242,14 @@ lzc_ioctl(zfs_ioc_t ioc, const char *name,
 			    malloc(zc.zc_nvlist_dst_size);
 			if (zc.zc_nvlist_dst == (uint64_t)0) {
 				error = ENOMEM;
+				fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+				fprintf(stderr, "error=%X\n", error);
 				goto out;
 			}
 		} else {
 			error = errno;
+			fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+			fprintf(stderr, "error=%X\n", error);
 			break;
 		}
 	}
@@ -717,6 +726,7 @@ lzc_send_wrapper(int (*func)(int, void *), int orig_fd, void *data)
 
 	return (err);
 #else
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 	return (func(orig_fd, data));
 #endif
 }
@@ -768,6 +778,7 @@ int
 lzc_send_redacted(const char *snapname, const char *from, int fd,
     enum lzc_send_flags flags, const char *redactbook)
 {
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 	return (lzc_send_resume_redacted(snapname, from, fd, flags, 0, 0,
 	    redactbook));
 }
@@ -802,6 +813,8 @@ lzc_send_resume_redacted_cb_impl(const char *snapname, const char *from, int fd,
 	nvlist_t *args;
 	int err;
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+
 	args = fnvlist_alloc();
 	fnvlist_add_int32(args, "fd", fd);
 	if (from != NULL)
@@ -825,6 +838,7 @@ lzc_send_resume_redacted_cb_impl(const char *snapname, const char *from, int fd,
 
 	err = lzc_ioctl(ZFS_IOC_SEND_NEW, snapname, args, NULL);
 	nvlist_free(args);
+	fprintf(stderr, "err=%X\n", err);
 	return (err);
 }
 
@@ -841,6 +855,7 @@ static int
 lzc_send_resume_redacted_cb(int fd, void *arg)
 {
 	struct lzc_send_resume_redacted *zsrr = arg;
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 	return (lzc_send_resume_redacted_cb_impl(zsrr->snapname, zsrr->from,
 	    fd, zsrr->flags, zsrr->resumeobj, zsrr->resumeoff,
 	    zsrr->redactbook));
@@ -859,6 +874,7 @@ lzc_send_resume_redacted(const char *snapname, const char *from, int fd,
 		.resumeoff = resumeoff,
 		.redactbook = redactbook,
 	};
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 	return (lzc_send_wrapper(lzc_send_resume_redacted_cb, fd, &zsrr));
 }
 

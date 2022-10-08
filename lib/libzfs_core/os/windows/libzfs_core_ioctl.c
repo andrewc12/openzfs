@@ -101,10 +101,20 @@ lzc_ioctl_fd(int fd, unsigned long request, zfs_cmd_t *zc)
 	size_t oldsize;
 	int ret, cflag = ZFS_CMD_COMPAT_NONE;
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "errno=%X\n", errno);
+
 	oldsize = zc->zc_nvlist_dst_size;
 	ret = zcmd_ioctl_compat(fd, request, zc, cflag);
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "errno=%X\n", errno);
+
 	if (ret == 0 && oldsize < zc->zc_nvlist_dst_size) {
+
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+		fprintf(stderr, "errno=%X\n", errno);
+
 		ret = -1;
 		errno = ENOMEM;
 	}

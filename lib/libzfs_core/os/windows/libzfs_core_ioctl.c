@@ -33,8 +33,12 @@ zcmd_ioctl_compat(int fd, int request, zfs_cmd_t *zc, const int cflag)
 	zfs_iocparm_t *zip;
 	DWORD bytesReturned = 0;
 
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+
 	switch (cflag) {
 	case ZFS_CMD_COMPAT_NONE:
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+
 		ncmd = CTL_CODE(ZFSIOCTL_TYPE, ZFSIOCTL_BASE + request,
 		    METHOD_NEITHER, FILE_ANY_ACCESS);
 
@@ -55,6 +59,9 @@ zcmd_ioctl_compat(int fd, int request, zfs_cmd_t *zc, const int cflag)
 		    &bytesReturned,
 		    NULL);
 
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+		fprintf(stderr, "ret=%X\n", ret);
+
 		if (ret == 0)
 			ret = GetLastError();
 		else
@@ -65,15 +72,20 @@ zcmd_ioctl_compat(int fd, int request, zfs_cmd_t *zc, const int cflag)
 		 * If ioctl worked, get actual rc from kernel, which goes
 		 * into errno, and return -1 if not-zero.
 		 */
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+		fprintf(stderr, "ret=%X\n", ret);
 		if (ret == 0) {
 			errno = zip->zfs_ioc_error;
 			if (zip->zfs_ioc_error != 0)
 				ret = -1;
 		}
 		free(zip);
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+		fprintf(stderr, "ret=%X\n", ret);
 		return (ret);
 
 	default:
+		fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
 		abort();
 		return (EINVAL);
 	}
@@ -81,6 +93,8 @@ zcmd_ioctl_compat(int fd, int request, zfs_cmd_t *zc, const int cflag)
 	/* Pass-through ioctl, rarely used if at all */
 
 	ret = ioctl(fd, ncmd, zc_c);
+	fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+	fprintf(stderr, "ret=%X\n", ret);
 	ASSERT0(ret);
 
 	zfs_cmd_compat_get(zc, (caddr_t)zc_c, cflag);

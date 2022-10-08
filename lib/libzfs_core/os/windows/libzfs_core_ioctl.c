@@ -76,6 +76,8 @@ zcmd_ioctl_compat(int fd, int request, zfs_cmd_t *zc, const int cflag)
 		fprintf(stderr, "ret=%X\n", ret);
 		if (ret == 0) {
 			errno = zip->zfs_ioc_error;
+			fprintf(stderr, "%s:%d\r\n", __func__, __LINE__);
+			fprintf(stderr, "errno=%X\n", errno);
 			if (zip->zfs_ioc_error != 0)
 				ret = -1;
 		}

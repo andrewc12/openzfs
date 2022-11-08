@@ -1562,3 +1562,298 @@ jobs:
           python ${{ steps.drive.outputs.drive }}\winfstest\simpletap.py --run
       shell: cmd
 
+
+
+
+
+
+
+  test4_adstest:
+    needs: [build_windows] #, build_wsl]
+    timeout-minutes: 30
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: windows-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: dev_build_inno
+
+#    - uses: actions/download-artifact@v3
+#      with:
+#        name: build result
+
+#    - name: get files
+#      run: Get-ChildItem -Recurse
+
+    - name: get diskdrive
+      run: wmic diskdrive list
+
+
+    #- uses: suisei-cn/actions-download-file@v1.0.1
+    #  #id: innoinstaller
+    #  with:
+    #    url: 'https://github.com/andrewc12/zfsfiledump/raw/main/OpenZFSOnWindowsaa'
+    #    target: ${{github.workspace}}/
+
+
+
+    #- uses: suisei-cn/actions-download-file@v1.0.1
+    #  #id: innoinstaller
+    #  with:
+    #    url: 'https://github.com/andrewc12/zfsfiledump/raw/main/OpenZFSOnWindowsab'
+    #    target: ${{github.workspace}}/
+
+
+
+    #- uses: suisei-cn/actions-download-file@v1.0.1
+    #  #id: innoinstaller
+    #  with:
+    #    url: 'https://github.com/andrewc12/zfsfiledump/raw/main/OpenZFSOnWindowsac'
+    #    target: ${{github.workspace}}/
+
+
+
+    #- uses: suisei-cn/actions-download-file@v1.0.1
+    #  #id: innoinstaller
+    #  with:
+    #    url: 'https://github.com/andrewc12/zfsfiledump/raw/main/OpenZFSOnWindowsad'
+    #    target: ${{github.workspace}}/
+
+
+
+
+
+
+
+
+#    - name: Download
+#      uses: suisei-cn/actions-download-file@v1.0.1
+#      #id: innoinstaller
+#      with:
+#        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/testdrives.zip'
+#        target: ${{github.workspace}}/
+#
+#
+#    - name: make disk
+#      run: |
+#        Expand-Archive -LiteralPath ${{github.workspace}}/testdrives.zip -DestinationPath D:\
+#
+#    - name: Download
+#      uses: suisei-cn/actions-download-file@v1.0.1
+#      #id: innoinstaller
+#      with:
+#        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/scriptname.txt'
+#        target: ${{github.workspace}}/
+#
+#    - name: make disk
+#      run: |
+#        diskpart /s scriptname.txt
+#
+#
+#
+#    - name: get diskdrive
+#      run: wmic diskdrive list
+#
+#
+#    - name: get files
+#      run: Get-ChildItem -Recurse
+
+    #- run: copy /b OpenZFSOnWindowsaa+OpenZFSOnWindowsab+OpenZFSOnWindowsac+OpenZFSOnWindowsad OpenZFSOnWindows-a.exe
+    #  shell: cmd
+
+
+
+    - name: get zfsexename
+      id: zfsinstaller
+      run: |
+        $p = Get-ChildItem | Where-Object {$_.Name -like 'OpenZFSOnWindows-*.exe'} | Select-Object -first 1
+        echo $p
+        $f = (Get-Item $p ).Name
+        echo $f
+        echo "::set-output name=filename::$($f)"
+
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.001'
+        target: ${{github.workspace}}/
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.002'
+        target: ${{github.workspace}}/
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.003'
+        target: ${{github.workspace}}/
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.004'
+        target: ${{github.workspace}}/
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.005'
+        target: ${{github.workspace}}/
+
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.006'
+        target: ${{github.workspace}}/
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.007'
+        target: ${{github.workspace}}/
+
+
+
+
+    - uses: suisei-cn/actions-download-file@v1.0.1
+      #id: innoinstaller
+      with:
+        url: 'https://github.com/andrewc12/zfsfiledump/raw/main/ads_split.vhd.zst.008'
+        target: ${{github.workspace}}/
+
+
+
+
+    - run: copy /b ads_split.vhd.zst.001+ads_split.vhd.zst.002+ads_split.vhd.zst.003+ads_split.vhd.zst.004+ads_split.vhd.zst.005+ads_split.vhd.zst.006+ads_split.vhd.zst.007+ads_split.vhd.zst.008 ads_split.vhd.zst
+      shell: cmd
+
+
+
+
+    # https://github.com/MicrosoftDocs/windows-powershell-docs/issues/266
+    - name: Import root certificate
+      run: |
+        $plaintextpwd = 'password1234'
+        $pwd = ConvertTo-SecureString -String $plaintextpwd -Force -AsPlainText
+        Import-PfxCertificate -FilePath ${{github.workspace}}/contrib/windows/TestCert/test_sign_cert_pass.pfx -CertStoreLocation Cert:\LocalMachine\Root -Password $pwd
+        Import-PfxCertificate -FilePath ${{github.workspace}}/contrib/windows/TestCert/test_sign_cert_pass.pfx -CertStoreLocation Cert:\LocalMachine\TrustedPublisher -Password $pwd
+
+    - name: debug - echo filename
+      run: echo ${{ steps.zfsinstaller.outputs.filename }}
+
+#    - name: debug - list
+#      run: ls ${{github.workspace}}\
+
+    - name: debug - list
+      run: ls ${{github.workspace}}\${{ steps.zfsinstaller.outputs.filename }}
+
+    #- name: install zfs
+    #  run: ${{github.workspace}}\${{ steps.zfsinstaller.outputs.filename }} /NORESTART /ALLUSERS /VERYSILENT /LOG="${{github.workspace}}\InnoSetup-Install.log"
+
+    - name: install zfs
+      run: 'Start-Process -FilePath "${{github.workspace}}\${{ steps.zfsinstaller.outputs.filename }}" -Wait -ArgumentList "/NORESTART /ALLUSERS /VERYSILENT /LOG=`"${{github.workspace}}\InnoSetup-Install.log`""'
+
+    #- name: Wait for install to finish
+    #  run: Start-Sleep -Seconds 30
+    #  uses: iFaxity/wait-on-action@v1
+    #  with:
+    #    resource: 'C:\Program Files\OpenZFS On Windows\zpool.exe'
+
+#    - name: debug - print log
+#      run: cat "${{github.workspace}}\InnoSetup-Install.log"
+#
+#    - name: debug - list
+#      run: ls "C:\Program Files"
+#
+#    - name: debug - list
+#      run: ls "C:\Program Files\OpenZFS On Windows"
+
+    - name: debug - get status
+      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
+
+
+
+
+
+
+
+    - name: Create backing files
+      run: |
+          $f = new-object System.IO.FileStream ${{github.workspace}}\test01.dat, Create, ReadWrite
+          $f.SetLength(1GB)
+          $f.Close()
+
+    - name: create pool
+      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create tank \\?\${{github.workspace}}\test01.dat'
+
+    - name: get pool status
+      run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" status'
+
+    - name: get pool mount
+      run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" mount'
+
+    - name: get pool mount
+      id: drive  # Remember to give an ID if you need the output filename
+      run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe"  mount | Select-String -Pattern "^tank +([A-Za-z]:\\)"  | % {"::set-output name=drive::$($_.matches.groups[1].value)"}'
+
+    - name: echo
+      run: echo ${{ steps.drive.outputs.drive }}
+
+    - name: extract
+      run: zstd -d ${{github.workspace}}\ads_split.vhd.zst
+
+
+    - name: get diskdrive
+      run: wmic diskdrive list
+
+    - name: get diskdrive
+      run: (Get-PSDrive).Name -match '^[a-z]$'
+
+
+    - name: Create backing files
+      id: drive2  # Remember to give an ID if you need the output filename
+      run: |
+          $mountResult = Mount-DiskImage ${{github.workspace}}\ads_split.vhd -PassThru
+          $mountResult | Get-Volume
+          echo "::set-output name=drive::F:"
+          #$mountResult | Get-Volume | % {"::set-output name=drive::$($_.matches.groups[1].value)"}
+
+
+    - name: get diskdrive
+      run: wmic diskdrive list
+
+
+    - name: get diskdrive
+      run: (Get-PSDrive).Name -match '^[a-z]$'
+
+    - name: echo
+      run: echo ${{ steps.drive2.outputs.drive }}
+
+
+    - name: run tests
+      run: robocopy ${{ steps.drive2.outputs.drive }}\curtin ${{ steps.drive.outputs.drive }}curtin /E /b /R:0 /W:0

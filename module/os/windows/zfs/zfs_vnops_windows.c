@@ -930,13 +930,7 @@ zfs_vnop_lookup_impl(PIRP Irp, PIO_STACK_LOCATION IrpSp, mount_t *zmo,
 			return (STATUS_OBJECT_NAME_COLLISION);
 		}
 		// A directory component did not exist, or was a file
-		if (dvp == NULL) {
-			dprintf("%s: failed to find dvp - or dvp is a file\n",
-			    __func__);
-			Irp->IoStatus.Information = FILE_DOES_NOT_EXIST;
-			return (STATUS_OBJECT_NAME_NOT_FOUND);
-		}
-		if (error == ENOTDIR) {
+		if ((dvp == NULL) || (error == ENOTDIR)) {
 			dprintf("%s: failed to find dvp - or dvp is a file\n",
 			    __func__);
 			Irp->IoStatus.Information = 0;

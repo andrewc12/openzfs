@@ -6360,7 +6360,7 @@ kmem_strfree(char *str)
  */
 
 int
-kmem_scnprintf(char *restrict str, size_t size, const char *restrict fmt, ...)
+kmem_scnprintf(char *__restrict str, size_t size, const char *__restrict fmt, ...)
 {
 	int n;
 	va_list ap;

@@ -4,3 +4,5 @@ andrew_isatty_fix - add print debug to try to fix zfs send
 andrew_matrixbuild - macos build on different versions
 andrew_wslbuildfix - fixes to build in wsl
 andrew_winfstest - fs test building
+andrew-zlib - upgrade zlib
+andrew-fixerrors - fix VS build errors

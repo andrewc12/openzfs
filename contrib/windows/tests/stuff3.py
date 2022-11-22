@@ -1,4 +1,19 @@
+import os
+import argparse
+
 import subprocess
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Process command line arguments.')
+    parser.add_argument('-path', type=dir_path)
+    return parser.parse_args()
+def dir_path(path):
+    if os.path.isdir(path):
+        return path
+    else:
+        raise argparse.ArgumentTypeError(f"readable_dir:{path} is not a valid path")
+
+
 
 def get_DeviceId():
     magic_number_process = subprocess.run(
@@ -78,27 +93,30 @@ def destroy_pool(name):
     )
 
 
+def main():
+    parsed_args = parse_arguments()
 
-#print(get_DeviceId())
+    print(get_DeviceId())
 
-#allocate_file('C:/Users/andre/a.img', 1024*1024*1024)
+    print(get_driveletters())
 
-print(get_driveletters())
+    #allocate_file('C:/Users/andre/b.img', 1024*1024*1024)
 
-allocate_file('C:/Users/andre/b.img', 1024*1024*1024)
+    #create_pool("testb", "\\\\?\\C:\\Users\\andre\\b.img")
 
-create_pool("testb", "\\\\?\\C:\\Users\\andre\\b.img")
+    #print(get_driveletters())
 
-print(get_driveletters())
+    #destroy_pool("testb")
 
-destroy_pool("testb")
-
-print(get_driveletters())
+    #print(get_driveletters())
 
 
 
-#    - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" create -f test02 \\?\${{github.workspace}}\test01.dat \\?\${{github.workspace}}\test02.dat'
+    
+if __name__ == "__main__":
+main()
 
-#    - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test03'
+
+
 
 

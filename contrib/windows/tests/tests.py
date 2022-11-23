@@ -109,7 +109,7 @@ def zpool(*args):
         stderr=subprocess.PIPE
     )
 
-    return magic_number_process.stdout, magic_number_process.stderr
+    return magic_number_process.returncode, magic_number_process.stdout, magic_number_process.stderr
 
 
 

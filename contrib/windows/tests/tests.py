@@ -135,11 +135,11 @@ def main():
 
         allocate_file(q, 1024*1024*1024)
 
-        print( zpool("create", "-f", "test01",tounc(q)) )
+        print( zpool("create", "-f", "test01", tounc(q)) )
 
         print(get_driveletters())
 
-        destroy_pool("test01")
+        print( zpool("destroy", "-f", "test01") )
 
         print(get_driveletters())
 

@@ -125,23 +125,50 @@ def main():
     print(p.as_posix())
 
 
+    p = PureWindowsPath("C:\\Users\\andre")
+
+    print(p)
+    print(p.parts)
+    print(p.is_absolute())
+    print(p.as_posix())
+
+    q = PureWindowsPath("\\\\?\\").joinpath(p)
+
+    print(q)
+    print(q.parts)
+    print(q.is_absolute())
+    print(q.as_posix())
 
 
+    q = PureWindowsPath("\\\\?\\", p, "b.img")
 
+    print(q)
+    print(q.parts)
+    print(q.is_absolute())
+    print(q.as_posix())
+
+    q = PureWindowsPath(p, "b.img")
+
+    print(q)
+    print(q.parts)
+    print(q.is_absolute())
+    print(q.as_posix())
+
+    
     
     print(get_DeviceId())
 
     print(get_driveletters())
 
-    #allocate_file('C:/Users/andre/b.img', 1024*1024*1024)
+    allocate_file(q, 1024*1024*1024)
 
-    #create_pool("testb", "\\\\?\\C:\\Users\\andre\\b.img")
+    create_pool("testb","\\\\?\\" + str(q))
 
-    #print(get_driveletters())
+    print(get_driveletters())
 
-    #destroy_pool("testb")
+    destroy_pool("testb")
 
-    #print(get_driveletters())
+    print(get_driveletters())
 
 
 

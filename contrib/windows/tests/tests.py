@@ -103,6 +103,11 @@ def destroy_pool(name):
     )
 
 
+def tounc(name):
+    q = "\\\\?\\" + str(name)
+    return q
+
+
 def main():
     parsed_args = parse_arguments()
 
@@ -111,37 +116,27 @@ def main():
     p = PureWindowsPath(parsed_args.path)
 
     print(p)
-    print(p.parts)
-    print(p.is_absolute())
-    print(p.as_posix())
 
     if p.is_absolute():
 
-        q = PureWindowsPath(p, "b.img")
-
-        print(q)
-        print(q.parts)
-        print(q.is_absolute())
-        print(q.as_posix())
-
         print(get_DeviceId())
-
         print(get_driveletters())
+        q = PureWindowsPath(p, "test01.dat")
 
         allocate_file(q, 1024*1024*1024)
 
-        create_pool("testb","\\\\?\\" + str(q))
+        create_pool("test01",tounc(q))
 
         print(get_driveletters())
 
-        destroy_pool("testb")
+        destroy_pool("test01")
 
         print(get_driveletters())
 
         delete_file(q)
 
 
-    
+
 if __name__ == "__main__":
     main()
 

@@ -102,6 +102,16 @@ def destroy_pool(name):
         stderr=subprocess.PIPE
     )
 
+def zpool(*args):
+    magic_number_process = subprocess.run(
+        ["C:\\Program Files\\OpenZFS On Windows\\zpool.exe", *args],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+
+    return stdout, stderr
+
+
 
 def tounc(name):
     q = "\\\\?\\" + str(name)

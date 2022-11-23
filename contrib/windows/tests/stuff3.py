@@ -5,7 +5,7 @@ import subprocess
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Process command line arguments.')
-    parser.add_argument('-path', type=dir_path)
+    parser.add_argument('-path', type=dir_path, required=True)
     return parser.parse_args()
 def dir_path(path):
     if os.path.isdir(path):
@@ -114,7 +114,7 @@ def main():
 
     
 if __name__ == "__main__":
-main()
+    main()
 
 
 

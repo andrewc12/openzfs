@@ -104,80 +104,41 @@ def destroy_pool(name):
 
 
 def main():
-    #parsed_args = parse_arguments()
+    parsed_args = parse_arguments()
 
-    #print(parsed_args.path)
+    print(parsed_args.path)
 
-    #p = PureWindowsPath(parsed_args.path)
-    p = PureWindowsPath("C:\\Users\\andre")
-
-    print(p)
-    print(p.parts)
-    print(p.is_absolute())
-    print(p.as_posix())
-
-    p = PureWindowsPath("\\\\.\\C:\\Users\\andre")
+    p = PureWindowsPath(parsed_args.path)
 
     print(p)
     print(p.parts)
     print(p.is_absolute())
     print(p.as_posix())
 
+    if p.is_absolute():
 
-    p = PureWindowsPath("\\\\?\\C:\\Users\\andre")
+        q = PureWindowsPath(p, "b.img")
 
-    print(p)
-    print(p.parts)
-    print(p.is_absolute())
-    print(p.as_posix())
+        print(q)
+        print(q.parts)
+        print(q.is_absolute())
+        print(q.as_posix())
 
+        print(get_DeviceId())
 
-    p = PureWindowsPath("C:\\Users\\andre")
+        print(get_driveletters())
 
-    print(p)
-    print(p.parts)
-    print(p.is_absolute())
-    print(p.as_posix())
+        allocate_file(q, 1024*1024*1024)
 
-    q = PureWindowsPath("\\\\?\\").joinpath(p)
+        create_pool("testb","\\\\?\\" + str(q))
 
-    print(q)
-    print(q.parts)
-    print(q.is_absolute())
-    print(q.as_posix())
+        print(get_driveletters())
 
+        destroy_pool("testb")
 
-    q = PureWindowsPath("\\\\?\\", p, "b.img")
+        print(get_driveletters())
 
-    print(q)
-    print(q.parts)
-    print(q.is_absolute())
-    print(q.as_posix())
-
-    q = PureWindowsPath(p, "b.img")
-
-    print(q)
-    print(q.parts)
-    print(q.is_absolute())
-    print(q.as_posix())
-
-    
-    
-    print(get_DeviceId())
-
-    print(get_driveletters())
-
-    allocate_file(q, 1024*1024*1024)
-
-    create_pool("testb","\\\\?\\" + str(q))
-
-    print(get_driveletters())
-
-    destroy_pool("testb")
-
-    print(get_driveletters())
-
-    delete_file(q)
+        delete_file(q)
 
 
     

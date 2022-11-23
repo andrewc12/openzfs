@@ -3,6 +3,9 @@ import argparse
 
 import subprocess
 
+from pathlib import Path, PurePosixPath, PureWindowsPath, WindowsPath
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Process command line arguments.')
     parser.add_argument('-path', type=dir_path, required=True)
@@ -94,8 +97,38 @@ def destroy_pool(name):
 
 
 def main():
-    parsed_args = parse_arguments()
+    #parsed_args = parse_arguments()
 
+    #print(parsed_args.path)
+
+    #p = PureWindowsPath(parsed_args.path)
+    p = PureWindowsPath("C:\\Users\\andre")
+
+    print(p)
+    print(p.parts)
+    print(p.is_absolute())
+    print(p.as_posix())
+
+    p = PureWindowsPath("\\\\.\\C:\\Users\\andre")
+
+    print(p)
+    print(p.parts)
+    print(p.is_absolute())
+    print(p.as_posix())
+
+
+    p = PureWindowsPath("\\\\?\\C:\\Users\\andre")
+
+    print(p)
+    print(p.parts)
+    print(p.is_absolute())
+    print(p.as_posix())
+
+
+
+
+
+    
     print(get_DeviceId())
 
     print(get_driveletters())

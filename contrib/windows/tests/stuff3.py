@@ -57,6 +57,13 @@ def allocate_file(name, size):
         f.seek(size)
         f.write(b'0')
 
+def delete_file(name):
+    if os.path.exists(name):
+        os.remove(name)
+    else:
+        print("The file does not exist")
+
+
 def get_driveletters():
     magic_number_process = subprocess.run(
         ["zfs.exe", "mount"],
@@ -170,6 +177,7 @@ def main():
 
     print(get_driveletters())
 
+    delete_file(q)
 
 
     

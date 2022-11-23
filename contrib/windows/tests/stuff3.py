@@ -97,7 +97,7 @@ def create_pool(name, file):
 
 def destroy_pool(name):
     magic_number_process = subprocess.run(
-        ["zpool.exe", "destroy", "-f", name],
+        ["C:\\Program Files\\OpenZFS On Windows\\zpool.exe", "destroy", "-f", name],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )

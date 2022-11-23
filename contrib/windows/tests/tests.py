@@ -135,7 +135,7 @@ def main():
 
         allocate_file(q, 1024*1024*1024)
 
-        create_pool("test01",tounc(q))
+        print( zpool("create", "-f", "test01",tounc(q)) )
 
         print(get_driveletters())
 

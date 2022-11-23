@@ -66,7 +66,7 @@ def delete_file(name):
 
 def get_driveletters():
     magic_number_process = subprocess.run(
-        ["zfs.exe", "mount"],
+        ["C:\\Program Files\\OpenZFS On Windows\\zfs.exe", "mount"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -88,7 +88,7 @@ def get_driveletters():
 
 def create_pool(name, file):
     magic_number_process = subprocess.run(
-        ["zpool.exe", "create", "-f", name, file],
+        ["C:\\Program Files\\OpenZFS On Windows\\zpool.exe", "create", "-f", name, file],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )

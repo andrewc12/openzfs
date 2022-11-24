@@ -121,28 +121,24 @@ def tounc(name):
 def main():
     parsed_args = parse_arguments()
 
-    print(parsed_args.path)
+    print("Path:", parsed_args.path)
 
     p = PureWindowsPath(parsed_args.path)
 
-    print(p)
+    print("Path object:", p)
+
+    print("Physical devices", get_DeviceId())
 
     if p.is_absolute():
 
-        print(get_DeviceId())
-        print(get_driveletters())
+
+        print("Drive letters before pool create:", get_driveletters())
         q = PureWindowsPath(p, "test01.dat")
-
         allocate_file(q, 1024*1024*1024)
-
         print( zpool("create", "-f", "test01", tounc(q)) )
-
-        print(get_driveletters())
-
+        print("Drive letters after pool create:", get_driveletters())
         print( zpool("destroy", "-f", "test01") )
-
-        print(get_driveletters())
-
+        print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
 
 

@@ -146,6 +146,23 @@ def main():
 
 
 
+
+        print("Drive letters before pool create:", get_driveletters())
+        q = PureWindowsPath(p, "test01.dat")
+        allocate_file(q, 1024*1024*1024)
+        r = PureWindowsPath(p, "test02.dat")
+        allocate_file(r, 1024*1024*1024)
+        ret = zpool("create", "-f", "test02", tounc(q), tounc(r))
+        print(ret)
+        if ret.returncode != 0:
+            print("FAIL")
+        print("Drive letters after pool create:", get_driveletters())
+        print( zpool("destroy", "-f", "test02") )
+        print("Drive letters after pool destroy:", get_driveletters())
+        delete_file(q)
+        delete_file(r)
+
+
 if __name__ == "__main__":
     main()
 

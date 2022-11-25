@@ -137,7 +137,7 @@ def main():
         allocate_file(q, 1024*1024*1024)
         ret = zpool("create", "-f", "test01", tounc(q))
         print(ret)
-        if ret.returncode not 0:
+        if ret.returncode != 0:
             print("FAIL")
         print("Drive letters after pool create:", get_driveletters())
         print( zpool("destroy", "-f", "test01") )

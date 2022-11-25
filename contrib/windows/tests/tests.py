@@ -109,7 +109,7 @@ def zpool(*args):
         stderr=subprocess.PIPE
     )
 
-    return magic_number_process.returncode, magic_number_process.stdout, magic_number_process.stderr
+    return magic_number_process
 
 
 
@@ -135,7 +135,8 @@ def main():
         print("Drive letters before pool create:", get_driveletters())
         q = PureWindowsPath(p, "test01.dat")
         allocate_file(q, 1024*1024*1024)
-        print( zpool("create", "-f", "test01", tounc(q)) )
+        ret = zpool("create", "-f", "test01", tounc(q))
+        print(ret)
         print("Drive letters after pool create:", get_driveletters())
         print( zpool("destroy", "-f", "test01") )
         print("Drive letters after pool destroy:", get_driveletters())

@@ -130,6 +130,7 @@ def main():
     print("Physical devices", get_DeviceId())
 
     if p.is_absolute():
+        print("=" * 20)
 
 
         print("Drive letters before pool create:", get_driveletters())
@@ -143,7 +144,7 @@ def main():
         print( zpool("destroy", "-f", "test01") )
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -162,7 +163,7 @@ def main():
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
         delete_file(r)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -186,7 +187,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -205,7 +206,7 @@ def main():
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
         delete_file(r)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -229,7 +230,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -254,7 +255,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
-        print("\n")
+        print("=" * 20)
 
 
 
@@ -280,7 +281,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
-        print("\n")
+        print("=" * 20)
 
 
 if __name__ == "__main__":

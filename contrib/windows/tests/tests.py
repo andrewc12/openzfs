@@ -143,6 +143,7 @@ def main():
         print( zpool("destroy", "-f", "test01") )
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
+        print("")
 
 
 
@@ -161,6 +162,7 @@ def main():
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
         delete_file(r)
+        print("")
 
 
 
@@ -184,6 +186,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
+        print("")
 
 
 
@@ -202,6 +205,7 @@ def main():
         print("Drive letters after pool destroy:", get_driveletters())
         delete_file(q)
         delete_file(r)
+        print("")
 
 
 
@@ -225,6 +229,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
+        print("")
 
 
 
@@ -249,6 +254,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
+        print("")
 
 
 
@@ -274,6 +280,7 @@ def main():
         delete_file(q)
         delete_file(r)
         delete_file(s)
+        print("")
 
 
 if __name__ == "__main__":

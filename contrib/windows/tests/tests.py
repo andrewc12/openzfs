@@ -319,7 +319,12 @@ def main():
         f = PureWindowsPath(get_driveletters()[0][1], "test02.file")
         allocate_file(f, 1024)
 
-        print( run(["zpool", "export", "-a"]) )
+        cmd = ["zpool", "export", "-a"]
+        print(" ".join(cmd))
+        ret = run(cmd)
+        print(ret)
+        if ret.returncode != 0:
+            print("FAIL")
 
         print( run(["zpool", "destroy", "-f", "testsn01"]) )
         print("Drive letters after pool destroy:", get_driveletters())
@@ -365,7 +370,12 @@ def main():
             print("FAIL")
 
 
-        print( run(["zpool", "export", "-a"]) )
+        cmd = ["zpool", "export", "-a"]
+        print(" ".join(cmd))
+        ret = run(cmd)
+        print(ret)
+        if ret.returncode != 0:
+            print("FAIL")
 
         print( run(["zpool", "destroy", "-f", "testsn02"]) )
         print("Drive letters after pool destroy:", get_driveletters())

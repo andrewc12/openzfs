@@ -349,6 +349,11 @@ jobs:
     - run: Start-Sleep -Seconds 10
       timeout-minutes: 1
 
+    - run: '& "C:\Program Files\OpenZFS On Windows\zfs.exe" mount'
+      timeout-minutes: 1
+    - run: Start-Sleep -Seconds 10
+      timeout-minutes: 1
+
     - run: '& "C:\Program Files\OpenZFS On Windows\zpool.exe" destroy -f test01'
       timeout-minutes: 1
     - run: Start-Sleep -Seconds 10

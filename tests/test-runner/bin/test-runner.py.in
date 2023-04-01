@@ -61,7 +61,11 @@ except ImportError:
         ]
     
     def monotonic_time():
-        return monotonic()
+        t = timespec()
+            if clock_gettime(CLOCK_MONOTONIC_RAW, ctypes.pointer(t)) != 0:
+            errno_ = ctypes.get_errno()
+            raise OSError(errno_, os.strerror(errno_))
+        return t.tv_sec + t.tv_nsec * 1e-9
 
 
 class Result(object):

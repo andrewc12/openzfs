@@ -3,6 +3,7 @@ dist_pkgdata_DATA = \
 	common.run \
 	freebsd.run \
 	linux.run \
+	macOS-CI.run \
 	longevity.run \
 	perf-regression.run \
 	sanity.run \

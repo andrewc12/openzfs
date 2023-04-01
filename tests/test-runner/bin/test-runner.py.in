@@ -36,7 +36,7 @@ from select import select
 from subprocess import PIPE
 from subprocess import Popen
 from threading import Timer
-from time import time
+from time import time, monotonic
 
 BASEDIR = '/var/tmp/test_results'
 TESTDIR = '/usr/share/zfs/'
@@ -58,16 +58,8 @@ class timespec(ctypes.Structure):
         ('tv_nsec', ctypes.c_long)
     ]
 
-librt = ctypes.CDLL('librt.so.1', use_errno=True)
-clock_gettime = librt.clock_gettime
-clock_gettime.argtypes = [ctypes.c_int, ctypes.POINTER(timespec)]
-
 def monotonic_time():
-    t = timespec()
-    if clock_gettime(CLOCK_MONOTONIC_RAW, ctypes.pointer(t)) != 0:
-        errno_ = ctypes.get_errno()
-        raise OSError(errno_, os.strerror(errno_))
-    return t.tv_sec + t.tv_nsec * 1e-9
+    return monotonic()
 
 
 class Result(object):

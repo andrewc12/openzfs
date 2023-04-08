@@ -70,7 +70,7 @@ int
 dm_inuse(char *dev_name, char **msg, dm_who_type_t who, int *errp)
 {
 	nvlist_t *dev_stats = NULL;
-	char *by, *data;
+	const char *by, *data;
 	nvpair_t *nvwhat = NULL;
 	nvpair_t *nvdesc = NULL;
 	int	found = 0;

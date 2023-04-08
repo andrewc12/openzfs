@@ -46,7 +46,7 @@ test_script:
     sudo scripts/cmd-macos.sh zed -fF &
 
 
-    scripts/zfs-tests.sh -r macOS-CI || echo "Tests not quite right"
+    scripts/zfs-tests.sh -v -r macOS-CI || echo "Tests not quite right"
 
 
     sysctl kern.stack_depth_max

@@ -45,10 +45,10 @@
 
 void dm_get_slice_stats(char *slice, nvlist_t **dev_stats, int *errp);
 nvlist_t *dm_get_stats(char *slice, int stat_type, int *errp);
-static int build_usage_string(char *dname, const char *by, char *data,
+static int build_usage_string(char *dname, const char *by, const char *data,
     char **msg,
 int *found, int *errp);
-void dm_get_usage_string(char *what, char *how, char **usage_string);
+void dm_get_usage_string(const char *what, char *how, char **usage_string);
 
 
 void
@@ -221,7 +221,7 @@ dm_get_slice_stats(char *slice, nvlist_t **dev_stats, int *errp)
 }
 
 void
-dm_get_usage_string(char *what, char *how, char **usage_string)
+dm_get_usage_string(const char *what, char *how, char **usage_string)
 {
 	if (usage_string == NULL || what == NULL) {
 		return;
@@ -293,7 +293,7 @@ dm_get_usage_string(char *what, char *how, char **usage_string)
  * localization.
  */
 static int
-build_usage_string(char *dname, const char *by, char *data, char **msg,
+build_usage_string(char *dname, const char *by, const char *data, char **msg,
     int *found, int *errp)
 {
 	int	len0;

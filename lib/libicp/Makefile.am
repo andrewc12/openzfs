@@ -14,9 +14,6 @@ nodist_libicp_la_SOURCES = \
 	module/icp/algs/aes/aes_impl_x86-64.c \
 	module/icp/algs/aes/aes_impl.c \
 	module/icp/algs/aes/aes_modes.c \
-	module/icp/algs/blake3/blake3.c \
-	module/icp/algs/blake3/blake3_generic.c \
-	module/icp/algs/blake3/blake3_impl.c \
 	module/icp/algs/edonr/edonr.c \
 	module/icp/algs/modes/modes.c \
 	module/icp/algs/modes/cbc.c \
@@ -46,8 +43,6 @@ nodist_libicp_la_SOURCES = \
 if TARGET_CPU_AARCH64
 nodist_libicp_la_SOURCES += \
 	module/icp/asm-aarch64/aes/aesv8-armx.S \
-	module/icp/asm-aarch64/blake3/b3_aarch64_sse2.S \
-	module/icp/asm-aarch64/blake3/b3_aarch64_sse41.S \
 	module/icp/asm-aarch64/sha2/sha256-armv8.S \
 	module/icp/asm-aarch64/sha2/sha512-armv8.S
 endif
@@ -60,8 +55,6 @@ endif
 
 if TARGET_CPU_POWERPC
 nodist_libicp_la_SOURCES += \
-	module/icp/asm-ppc64/blake3/b3_ppc64le_sse2.S \
-	module/icp/asm-ppc64/blake3/b3_ppc64le_sse41.S \
 	module/icp/asm-ppc64/sha2/sha256-ppc.S \
 	module/icp/asm-ppc64/sha2/sha512-ppc.S \
 	module/icp/asm-ppc64/sha2/sha256-p8.S \
@@ -77,9 +70,5 @@ nodist_libicp_la_SOURCES += \
 	module/icp/asm-x86_64/modes/aesni-gcm-x86_64.S \
 	module/icp/asm-x86_64/modes/ghash-x86_64.S \
 	module/icp/asm-x86_64/sha2/sha256-x86_64.S \
-	module/icp/asm-x86_64/sha2/sha512-x86_64.S \
-	module/icp/asm-x86_64/blake3/blake3_avx2.S \
-	module/icp/asm-x86_64/blake3/blake3_avx512.S \
-	module/icp/asm-x86_64/blake3/blake3_sse2.S \
-	module/icp/asm-x86_64/blake3/blake3_sse41.S
+	module/icp/asm-x86_64/sha2/sha512-x86_64.S
 endif

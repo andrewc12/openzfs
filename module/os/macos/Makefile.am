@@ -86,8 +86,6 @@ macos_zfs_CPPFLAGS+=-arch arm64e -arch x86_64
 macos_zfs_LDFLAGS+=-arch arm64e -arch x86_64
 zfs_ASM_SOURCES_C = \
 	%D%/../../icp/asm-aarch64/aes/aesv8-armx.S \
-	%D%/../../icp/asm-aarch64/blake3/b3_aarch64_sse2.S \
-	%D%/../../icp/asm-aarch64/blake3/b3_aarch64_sse41.S \
 	%D%/../../icp/asm-aarch64/sha2/sha256-armv8.S \
 	%D%/../../icp/asm-aarch64/sha2/sha512-armv8.S
 endif
@@ -122,11 +120,7 @@ zfs_ASM_SOURCES_AS = \
 	%D%/../../icp/asm-x86_64/modes/ghash-x86_64.S \
 	%D%/../../icp/asm-x86_64/modes/gcm_pclmulqdq.S \
 	%D%/../../icp/asm-x86_64/sha2/sha256-x86_64.S \
-	%D%/../../icp/asm-x86_64/sha2/sha512-x86_64.S \
-	%D%/../../icp/asm-x86_64/blake3/blake3_avx2.S \
-	%D%/../../icp/asm-x86_64/blake3/blake3_avx512.S \
-	%D%/../../icp/asm-x86_64/blake3/blake3_sse2.S \
-	%D%/../../icp/asm-x86_64/blake3/blake3_sse41.S
+	%D%/../../icp/asm-x86_64/sha2/sha512-x86_64.S
 else
 zfs_ASM_SOURCES_C =
 zfs_ASM_SOURCES_AS =
@@ -137,7 +131,6 @@ zfs_common_SRCS = \
 	%D%/../../zfs/aggsum.c \
 	%D%/../../zfs/arc.c \
 	%D%/../../avl/avl.c \
-	%D%/../../zfs/blake3_zfs.c \
 	%D%/../../zfs/blkptr.c \
 	%D%/../../zfs/bplist.c \
 	%D%/../../zfs/bpobj.c \
@@ -330,9 +323,6 @@ icp_SRCS = \
 	%D%/../../icp/algs/aes/aes_impl_x86-64.c \
 	%D%/../../icp/algs/aes/aes_impl.c \
 	%D%/../../icp/algs/aes/aes_modes.c \
-	%D%/../../icp/algs/blake3/blake3.c \
-	%D%/../../icp/algs/blake3/blake3_generic.c \
-	%D%/../../icp/algs/blake3/blake3_impl.c \
 	%D%/../../icp/algs/edonr/edonr.c \
 	%D%/../../icp/algs/modes/cbc.c \
 	%D%/../../icp/algs/modes/ccm.c \

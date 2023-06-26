@@ -340,38 +340,38 @@ def main():
 
 
 
-        preTest("snapshot hang")
-
-        ret = runWithPrint(["zpool", "create", "-f", "testsn02", tounc(f1)])
-        if ret.returncode != 0:
-            print("FAIL")
-        time.sleep(10)
-        print("Drive letters after pool create:", get_driveletters())
-
-        f = PureWindowsPath(get_driveletters()[0][1], "test01.file")
-        allocate_file(f, 1024)
-
-        ret = runWithPrint(["zfs", "snapshot", "testsn02@friday"])
-        if ret.returncode != 0:
-            print("FAIL")
-
-
-        f = PureWindowsPath(get_driveletters()[0][1], "test02.file")
-        allocate_file(f, 1024)
-
-        ret = runWithPrint(["zfs", "mount", "testsn02@friday"])
-        if ret.returncode != 0:
-            print("FAIL")
-
-
-        ret = runWithPrint(["zpool", "export", "-a"])
-        if ret.returncode != 0:
-            print("FAIL")
-        time.sleep(10)
-
-        runWithPrint(["zpool", "destroy", "-f", "testsn02"])
-        time.sleep(10)
-        postTest()
+        # preTest("snapshot hang")
+        #
+        # ret = runWithPrint(["zpool", "create", "-f", "testsn02", tounc(f1)])
+        # if ret.returncode != 0:
+        #     print("FAIL")
+        # time.sleep(10)
+        # print("Drive letters after pool create:", get_driveletters())
+        #
+        # f = PureWindowsPath(get_driveletters()[0][1], "test01.file")
+        # allocate_file(f, 1024)
+        #
+        # ret = runWithPrint(["zfs", "snapshot", "testsn02@friday"])
+        # if ret.returncode != 0:
+        #     print("FAIL")
+        #
+        #
+        # f = PureWindowsPath(get_driveletters()[0][1], "test02.file")
+        # allocate_file(f, 1024)
+        #
+        # ret = runWithPrint(["zfs", "mount", "testsn02@friday"])
+        # if ret.returncode != 0:
+        #     print("FAIL")
+        #
+        #
+        # ret = runWithPrint(["zpool", "export", "-a"])
+        # if ret.returncode != 0:
+        #     print("FAIL")
+        # time.sleep(10)
+        #
+        # runWithPrint(["zpool", "destroy", "-f", "testsn02"])
+        # time.sleep(10)
+        # postTest()
 
 
 

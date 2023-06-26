@@ -7,6 +7,12 @@ from pathlib import Path, PurePosixPath, PureWindowsPath, WindowsPath
 
 from pprint import pprint
 
+import time
+
+
+import time
+
+print("Printed immediately.")
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Process command line arguments.')
     parser.add_argument('-path', type=dir_path, required=True)
@@ -192,10 +198,12 @@ def main():
 
         preTest()
         ret = runWithPrint(["zpool", "create", "-f", "test01", tounc(f1)])
+        time.sleep(10)
         if ret.returncode != 0:
             print("FAIL")
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test01"])
+        time.sleep(10)
         postTest()
 
 
@@ -206,8 +214,10 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "test02", tounc(f1), tounc(f2)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test02"])
+        time.sleep(10)
         postTest()
 
 
@@ -218,8 +228,10 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "test03", tounc(f1), tounc(f2), tounc(f3)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test03"])
+        time.sleep(10)
         postTest()
 
 
@@ -230,8 +242,10 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "test04", "mirror", tounc(f1), tounc(f2)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test04"])
+        time.sleep(10)
         postTest()
 
 
@@ -240,10 +254,12 @@ def main():
 
         preTest()
         ret = runWithPrint(["zpool", "create", "-f", "test05", "mirror", tounc(f1), tounc(f2), tounc(f3)])
+        time.sleep(10)
         if ret.returncode != 0:
             print("FAIL")
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test05"])
+        time.sleep(10)
         postTest()
 
 
@@ -254,8 +270,10 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "test06", "raidz", tounc(f1), tounc(f2), tounc(f3)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test06"])
+        time.sleep(10)
         postTest()
 
 
@@ -266,8 +284,10 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "test07", "raidz1", tounc(f1), tounc(f2), tounc(f3)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "test07"])
+        time.sleep(10)
         postTest()
 
 
@@ -292,6 +312,7 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "testsn01", tounc(f1)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
 
         f = PureWindowsPath(get_driveletters()[0][1], "test01.file")
@@ -307,9 +328,11 @@ def main():
         ret = runWithPrint(["zpool", "export", "-a"])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
 
         runWithPrint(["zpool", "destroy", "-f", "testsn01"])
 
+        time.sleep(10)
         postTest()
 
 
@@ -322,6 +345,7 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "testsn02", tounc(f1)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
 
         f = PureWindowsPath(get_driveletters()[0][1], "test01.file")
@@ -343,8 +367,10 @@ def main():
         ret = runWithPrint(["zpool", "export", "-a"])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
 
         runWithPrint(["zpool", "destroy", "-f", "testsn02"])
+        time.sleep(10)
         postTest()
 
 
@@ -400,6 +426,7 @@ def main():
         ret = runWithPrint(["zpool", "create", "-f", "-O", "encryption=aes-256-ccm", "-O", "keylocation=" + nx, "-O", "keyformat=raw", "tank", tounc(f1)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
         print("Drive letters after pool create:", get_driveletters())
 
         ret = runWithPrint(["zfs", "get", "keylocation", "tank"])
@@ -409,6 +436,8 @@ def main():
         ret = runWithPrint(["zpool", "export", "tank"])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
+
 
 
 
@@ -419,9 +448,12 @@ def main():
         ret = runWithPrint(["zpool", "import", "-f", "-l", "-O", "encryption=aes-256-ccm", "-O", "keylocation=" + nx, "-O", "keyformat=raw", tounc(f1)])
         if ret.returncode != 0:
             print("FAIL")
+        time.sleep(10)
+
 
         print("Drive letters after pool create:", get_driveletters())
         runWithPrint(["zpool", "destroy", "-f", "tank"])
+        time.sleep(10)
         postTest()
 
 
@@ -442,6 +474,8 @@ def main():
             ret = runWithPrint(["zpool", "create", "-f", "tank" + str(i), tounc(f1)])
             if ret.returncode != 0:
                 print("FAIL")
+            time.sleep(10)
+
             print("Drive letters after pool create:", get_driveletters())
 
             f = PureWindowsPath(get_driveletters()[0][1], "test01.file")
@@ -451,6 +485,8 @@ def main():
                 print("FAIL")
 
             runWithPrint(["zpool", "destroy", "-f", "tank" + str(i)])
+            time.sleep(10)
+
 
         postTest()
 

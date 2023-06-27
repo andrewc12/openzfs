@@ -90,6 +90,8 @@ def get_driveletters():
 
     c = a.splitlines()
 
+    logging.debug("get_driveletters() {}".format(c))
+
     print("get_driveletters() debug",c)
 
     d = [x.split() for x in c]
@@ -161,8 +163,11 @@ def tounc(name):
 def runWithPrint(cmd):
     print(" ".join(cmd))
     ret = run(cmd)
-    print("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr))
-    logging.debug(str("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr)))
+    logging.debug(str("args={}".format(" ".join(ret.args))))
+    logging.debug(str("returncode={}".format(ret.returncode)))
+    logging.debug(str("stdout={}".format(ret.stdout)))
+    logging.debug(str("stderr={}".format(ret.stderr)))
+
 
     return ret
 

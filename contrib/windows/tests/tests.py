@@ -12,6 +12,10 @@ import time
 
 import json
 
+import logging
+
+
+
 print("Printed immediately.")
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Process command line arguments.')
@@ -157,7 +161,8 @@ def runWithPrint(cmd):
     print(" ".join(cmd))
     ret = run(cmd)
     print("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr))
-    print(json.dumps({'args': ret.args, 'returncode': ret.returncode, 'stdout': ret.stdout, 'stderr': ret.stderr}))
+    logging.debug(str("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr)))
+
     return ret
 
 def preTest(testName = None):

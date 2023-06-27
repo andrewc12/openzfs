@@ -10,7 +10,7 @@ from pprint import pprint
 import time
 
 
-import time
+import json
 
 print("Printed immediately.")
 def parse_arguments():
@@ -157,6 +157,7 @@ def runWithPrint(cmd):
     print(" ".join(cmd))
     ret = run(cmd)
     print("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr))
+    print(json.dumps(ret))
     return ret
 
 def preTest(testName = None):

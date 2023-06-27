@@ -92,9 +92,11 @@ def get_driveletters():
 
     logging.debug("get_driveletters() {}".format(c))
 
-    print("get_driveletters() debug",c)
+    #print("get_driveletters() debug",c)
 
     d = [x.split() for x in c]
+
+    logging.debug("get_driveletters() {}".format(d))
 
     return d
 
@@ -176,10 +178,10 @@ def preTest(testName = None):
     if testName is not None:
         print("Name:", testName)
 
-    print("Drive letters before pool create:", get_driveletters())
+    get_driveletters()
 
 def postTest():
-    print("Drive letters after pool destroy:", get_driveletters())
+    get_driveletters()
     print("=" * 20)
 
 def main():

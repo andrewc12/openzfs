@@ -157,7 +157,7 @@ def runWithPrint(cmd):
     print(" ".join(cmd))
     ret = run(cmd)
     print("args={}\nreturncode={}\nstdout={}\nstderrr={}".format(" ".join(ret.args), ret.returncode, ret.stdout, ret.stderr))
-    print(json.dumps(ret))
+    print(json.dumps({'args': ret.args, 'returncode': ret.returncode, 'stdout': ret.stdout, 'stderr': ret.stderr}))
     return ret
 
 def preTest(testName = None):

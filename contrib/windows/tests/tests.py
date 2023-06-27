@@ -14,6 +14,7 @@ import json
 
 import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
 
 print("Printed immediately.")

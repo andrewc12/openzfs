@@ -1,41 +1,25 @@
 /*
- * CDDL HEADER START
+ *  Copyright (c) 2008 Sun Microsystems, Inc.
+ *  Written by Ricardo Correia <Ricardo.M.Correia@Sun.COM>
  *
- * The contents of this file are subject to the terms of the
- * Common Development and Distribution License (the "License").
- * You may not use this file except in compliance with the License.
+ *  This file is part of the SPL, Solaris Porting Layer.
  *
- * You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
- * or http://www.opensolaris.org/os/licensing.
- * See the License for the specific language governing permissions
- * and limitations under the License.
+ *  The SPL is free software; you can redistribute it and/or modify it
+ *  under the terms of the GNU General Public License as published by the
+ *  Free Software Foundation; either version 2 of the License, or (at your
+ *  option) any later version.
  *
- * When distributing Covered Code, include this CDDL HEADER in each
- * file and include the License file at usr/src/OPENSOLARIS.LICENSE.
- * If applicable, add the following below this CDDL HEADER, with the
- * fields enclosed by brackets "[]" replaced with your own identifying
- * information: Portions Copyright [yyyy] [name of copyright owner]
+ *  The SPL is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ *  for more details.
  *
- * CDDL HEADER END
- *
- * Copyright (c) 1989, 2011, Oracle and/or its affiliates. All rights reserved.
- */
-/* Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T */
-/* All Rights Reserved */
-/*
- * Portions of this source code were derived from Berkeley
- * 4.3 BSD under license from the Regents of the University of
- * California.
- */
-
-/*
- * xdr.h, External Data Representation Serialization Routines.
- *
+ *  You should have received a copy of the GNU General Public License along
+ *  with the SPL.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef _SPL_RPC_XDR_H
 #define	_SPL_RPC_XDR_H
-
 
 #include <sys/types.h>
 #include <rpc/types.h>
@@ -51,10 +35,11 @@ enum xdr_op {
 struct xdr_ops;
 
 typedef struct {
-	struct xdr_ops *x_ops;
-	caddr_t x_addr;
-	caddr_t x_addr_end;
-	enum xdr_op x_op;
+	const struct xdr_ops	*x_ops;
+	    /* Let caller know xdrmem_create() succeeds */
+	caddr_t		x_addr;	/* Current buffer addr */
+	caddr_t		x_addr_end;	/* End of the buffer */
+	enum xdr_op	x_op;	/* Stream direction */
 } XDR;
 
 typedef bool_t (*xdrproc_t)(XDR *xdrs, void *ptr);
@@ -91,10 +76,8 @@ typedef struct xdr_bytesrec xdr_bytesrec;
 void xdrmem_create(XDR *xdrs, const caddr_t addr, const uint_t size,
     const enum xdr_op op);
 
-#define	xdr_destroy(xdrs) ((void) 0)
-
-#define	xdr_control(xdrs, req, info) (xdrs)->x_ops->xdr_control((xdrs),\
-	    (req), (info))
+#define	xdr_control(xdrs, req, info) \
+	(xdrs)->x_ops->xdr_control((xdrs), (req), (info))
 
 /*
  * For precaution, the following are defined as static inlines instead of macros
@@ -164,8 +147,8 @@ static inline bool_t xdr_string(XDR *xdrs, char **sp, const uint_t maxsize)
 static inline bool_t xdr_array(XDR *xdrs, caddr_t *arrp, uint_t *sizep,
     const uint_t maxsize, const uint_t elsize, const xdrproc_t elproc)
 {
-	return (xdrs->x_ops->xdr_array(xdrs, arrp, sizep, maxsize, elsize,
-	    elproc));
+	return xdrs->x_ops->xdr_array(xdrs, arrp, sizep, maxsize, elsize,
+	    elproc);
 }
 
 #endif /* SPL_RPC_XDR_H */

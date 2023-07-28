@@ -225,6 +225,7 @@ def main():
                 print("FAIL")
             postTest()
 
+            print(ret.stdout.decode())
 
         preTest()
         runWithPrint(["zpool", "destroy", "-f", "test01"])

@@ -219,7 +219,7 @@ def main():
 
         preTest("create tests:")
         f = PureWindowsPath(get_driveletters()[0][1])
-        ret = runWithPrint([str(p.joinpath, "\winbtrfs\test.exe"), "create", str(f)])
+        ret = runWithPrint([str(p.joinpath("\winbtrfs\test.exe")), "create", str(f)])
         time.sleep(10)
         if ret.returncode != 0:
             print("FAIL")

@@ -143,7 +143,10 @@ def zfs(*args):
 def run(args):
     d = {"zfs": "C:\\Program Files\\OpenZFS On Windows\\zfs.exe", "zpool": "C:\\Program Files\\OpenZFS On Windows\\zpool.exe"}
     l = list(args)
-    cmd = d[l[0]]
+    try:
+        cmd = d[l[0]]
+    except:
+        cmd = l[0]
     result = subprocess.run(
         [cmd, *l[1:]],
         stdout=subprocess.PIPE,
@@ -216,7 +219,7 @@ def main():
 
         preTest("create tests:")
         f = PureWindowsPath(get_driveletters()[0][1])
-        ret = runWithPrint([str(PureWindowsPath(p, "\winbtrfs\test.exe")), "create", str(f)])
+        ret = runWithPrint([str(p.joinpath, "\winbtrfs\test.exe"), "create", str(f)])
         time.sleep(10)
         if ret.returncode != 0:
             print("FAIL")

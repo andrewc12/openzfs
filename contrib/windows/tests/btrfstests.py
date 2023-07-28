@@ -224,7 +224,7 @@ def main():
 
 
 
-        preTest())
+        preTest()
         runWithPrint(["zpool", "destroy", "-f", "test01"])
         time.sleep(10)
         postTest()

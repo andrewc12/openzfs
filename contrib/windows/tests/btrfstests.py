@@ -229,8 +229,10 @@ def main():
 
                 print(ret.stdout.decode())
 
-                print(str(test), ret.stdout.decode().splitlines()[-1])
-                log_file.write(str(test), ret.stdout.decode().splitlines()[-1])
+                out = " ".join(str(test), ret.stdout.decode().splitlines()[-1])
+
+                print(out)
+                log_file.write(out)
 
             preTest()
             runWithPrint(["zpool", "destroy", "-f", "test01"])

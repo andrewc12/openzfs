@@ -227,7 +227,7 @@ def main():
 
             print(ret.stdout.decode())
 
-            print(str(test), " ", ret.stdout.decode().splitlines()[-1])
+            print(str(test), ret.stdout.decode().splitlines()[-1])
 
         preTest()
         runWithPrint(["zpool", "destroy", "-f", "test01"])

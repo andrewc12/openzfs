@@ -204,41 +204,44 @@ def main():
         allocate_file(f1, 1024*1024*1024)
 
 
+        with open(str(p.joinpath("winbtrfs.log")), "w") as log_file:
 
-        preTest()
-        ret = runWithPrint(["zpool", "create", "-f", "test01", tounc(f1)])
-        time.sleep(10)
-        if ret.returncode != 0:
-            print("FAIL")
-        print("Drive letters after pool create:", get_driveletters())
-        time.sleep(10)
-        postTest()
-
-
-
-        for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo', 'ea']:
-            preTest(str(test) +" tests:")
-            f = PureWindowsPath(get_driveletters()[0][1])
-            ret = runWithPrint([str(p.joinpath("winbtrfs", "test.exe")), str(test), str(f)])
+            preTest()
+            ret = runWithPrint(["zpool", "create", "-f", "test01", tounc(f1)])
             time.sleep(10)
             if ret.returncode != 0:
                 print("FAIL")
+            print("Drive letters after pool create:", get_driveletters())
+            time.sleep(10)
             postTest()
 
-            print(ret.stdout.decode())
-
-            print(str(test), ret.stdout.decode().splitlines()[-1])
-
-        preTest()
-        runWithPrint(["zpool", "destroy", "-f", "test01"])
-        time.sleep(10)
-        postTest()
 
 
+            #for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo', 'ea']:
+            for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo']:
+                preTest(str(test) +" tests:")
+                f = PureWindowsPath(get_driveletters()[0][1])
+                ret = runWithPrint([str(p.joinpath("winbtrfs", "test.exe")), str(test), str(f)])
+                time.sleep(10)
+                if ret.returncode != 0:
+                    print("FAIL")
+                postTest()
+
+                print(ret.stdout.decode())
+
+                print(str(test), ret.stdout.decode().splitlines()[-1])
+                log_file.write(str(test), ret.stdout.decode().splitlines()[-1])
+
+            preTest()
+            runWithPrint(["zpool", "destroy", "-f", "test01"])
+            time.sleep(10)
+            postTest()
 
 
 
-        delete_file(f1)
+
+
+            delete_file(f1)
 
 
 

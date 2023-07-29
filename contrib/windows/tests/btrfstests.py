@@ -229,7 +229,7 @@ def main():
 
                 print(ret.stdout.decode())
 
-                out = " ".join(str(test), ret.stdout.decode().splitlines()[-1])
+                out = " ".join([str(test), ret.stdout.decode().splitlines()[-1]])
 
                 print(out)
                 log_file.write(out)

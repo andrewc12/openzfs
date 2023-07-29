@@ -217,8 +217,7 @@ def main():
 
 
 
-            #for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo', 'ea']:
-            for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo']:
+            for test in ['create', 'supersede', 'overwrite', 'open_id', 'io', 'mmap', 'rename', 'rename_ex', 'delete', 'delete_ex', 'links', 'links_ex', 'oplock_i', 'oplock_ii', 'oplock_batch', 'oplock_filter', 'oplock_r', 'oplock_rw', 'oplock_rh', 'oplock_rwh', 'cs', 'reparse', 'streams', 'fileinfo', 'ea']:
                 preTest(str(test) +" tests:")
                 f = PureWindowsPath(get_driveletters()[0][1])
                 ret = runWithPrint([str(p.joinpath("winbtrfs", "test.exe")), str(test), str(f)])
@@ -235,7 +234,7 @@ def main():
                 log_file.write(out)
 
             preTest()
-            runWithPrint(["zpool", "destroy", "-f", "test01"])
+            #runWithPrint(["zpool", "destroy", "-f", "test01"])
             time.sleep(10)
             postTest()
 

@@ -232,6 +232,7 @@ def main():
 
                 print(out)
                 log_file.write(out)
+                log_file.write("\n")
 
             preTest()
             #runWithPrint(["zpool", "destroy", "-f", "test01"])

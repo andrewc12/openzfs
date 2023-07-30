@@ -2318,9 +2318,7 @@ jobs:
 
     - name: Adding markdown
       run: |
-        cat ${{github.workspace}}\winbtrfs.log >> $GITHUB_STEP_SUMMARY
-        cat $GITHUB_STEP_SUMMARY
-      shell: bash
+        cat ${{github.workspace}}\winbtrfs.log >>  | Out-File $env:GITHUB_STEP_SUMMARY
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0

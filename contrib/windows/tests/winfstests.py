@@ -239,7 +239,7 @@ def main():
                         total += 1
                         notok += 1
                 out = " ".join([str(test),
-                                ok, "/", total)
+                                ok, "/", total])
 
                 print(out)
                 log_file.write(out)

@@ -214,9 +214,19 @@ def main():
 
         with open(str(p.joinpath("winfs.log")), "w") as log_file:
 
-            for test in ['.\\t\\base\\00.t', '.\\t\\base\\01.t']:
+            for test in ['.\\t\\base\\00.t', '.\\t\\base\\01.t',
+                         '.\\t\\base\\02.t', '.\\t\\base\\03.t',
+                         '.\\t\\base\\04.t', '.\\t\\base\\05.t',
+                         '.\\t\\base\\06.t', '.\\t\\base\\07.t',
+                         '.\\t\\base\\08.t', '.\\t\\base\\09.t',
+                         '.\\t\\base\\10.t',
+                         '.\\t\\reparse\\00.t', '.\\t\\reparse\\01.t',
+                         '.\\t\\reparse\\02.t', '.\\t\\reparse\\03.t',
+                         '.\\t\\streams\\00.t', '.\\t\\streams\\01.t',
+                         '.\\t\\streams\\02.t', '.\\t\\streams\\03.t',
+                         '.\\t\\streams\\04.t']:
                 preTest(str(test) + " tests:")
-                f = PureWindowsPath(get_driveletters()[0][1])
+#                f = PureWindowsPath(get_driveletters()[0][1])
                 ret = runWithPrint(["python3.exe", str(test)])
                 time.sleep(10)
                 if ret.returncode != 0:
@@ -225,9 +235,10 @@ def main():
 
                 print(ret.stdout.decode())
 
-                #out = " ".join([str(test),
-                #                ret.stdout.decode().splitlines()[-1]])
-                #out = str(test) + "\n" + "\n".join(ret.stdout.decode().splitlines())
+#                out = " ".join([str(test),
+#                                ret.stdout.decode().splitlines()[-1]])
+#                out = str(test) + "\n" + "\n".join(
+#                               ret.stdout.decode().splitlines())
                 total = 0
                 ok = 0
                 notok = 0

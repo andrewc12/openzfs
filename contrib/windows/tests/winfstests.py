@@ -227,7 +227,19 @@ def main():
 
                 #out = " ".join([str(test),
                 #                ret.stdout.decode().splitlines()[-1]])
-                out = str(test) + "\n" + "\n".join(ret.stdout.decode().splitlines())
+                #out = str(test) + "\n" + "\n".join(ret.stdout.decode().splitlines())
+                total = 0
+                ok = 0
+                notok = 0
+                for i in ret.stdout.decode().splitlines():
+                    if i.startswith('ok'):
+                        total += 1
+                        ok += 1
+                    if i.startswith('not ok'):
+                        total += 1
+                        notok += 1
+                out = " ".join([str(test),
+                                ok, "/", total)
 
                 print(out)
                 log_file.write(out)

@@ -214,7 +214,7 @@ def main():
 
         with open(str(p.joinpath("winfs.log")), "w") as log_file:
 
-            for test in ['.\\t\\base\\00.t']:
+            for test in ['.\\t\\base\\00.t', '.\\t\\base\\01.t']:
                 preTest(str(test) + " tests:")
                 f = PureWindowsPath(get_driveletters()[0][1])
                 ret = runWithPrint(["python3.exe", str(test)])
@@ -225,8 +225,9 @@ def main():
 
                 print(ret.stdout.decode())
 
-                out = " ".join([str(test),
-                                ret.stdout.decode().splitlines()[-1]])
+                #out = " ".join([str(test),
+                #                ret.stdout.decode().splitlines()[-1]])
+                out = str(test) + "\n" + "\n".join(ret.stdout.decode().splitlines())
 
                 print(out)
                 log_file.write(out)

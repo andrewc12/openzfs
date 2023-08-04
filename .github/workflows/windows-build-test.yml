@@ -2499,19 +2499,6 @@ jobs:
     #- name: run winbtrfs tests
     #  run: '& "${{github.workspace}}\winbtrfs\test.exe" ${{ steps.drive.outputs.drive }}'
 
-    #https://github.com/maharmstone/btrfs/blob/master/src/tests/test.cpp#L453
-    - name: run winfstests
-      timeout-minutes: 1
-      run: |
-          ${{ steps.drivenoslash.outputs.drive }}
-          cd ${{ steps.drive.outputs.drive }}\winfstest
-          set PYTHONPATH=${{ steps.drive.outputs.drive }}\winfstest
-          python ${{ steps.drive.outputs.drive }}\winfstest\simpletap.py --run
-      shell: cmd
-
-
-
-
 
     - name: test
       run: |

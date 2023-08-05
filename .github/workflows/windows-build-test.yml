@@ -2700,7 +2700,12 @@ jobs:
 
 
 
-
+    - name: Adding markdown
+      run: |
+        ${{github.workspace}}\ifs_test_kit\ifstest.exe -g Virus /t AllInformationTest E:\ /n .\AllInformationTestResults.log /N 356789AB /T /p /m /E -R /j /r c: -d \Ntfs -a \datacoh.exe /u ifstest /U *rw53w52
+        ${{github.workspace}}\ifs_test_kit\ifstest.exe -g Virus /t AllInformationTest E: /n .\AllInformationTestResults.log /N 356789AB /T /p /m /E -R /j /r c: -d \Ntfs -a \datacoh.exe /u ifstest /U *rw53w52
+        Get-ChildItem -recurse -path ${{github.workspace}}
+        Get-ChildItem -recurse -path .\
 
 
 

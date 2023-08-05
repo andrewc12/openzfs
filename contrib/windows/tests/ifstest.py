@@ -239,8 +239,13 @@ def main():
                 print(ret.stdout.decode())
 
                 lines = ret.stdout.decode().splitlines()
-                outlines = lines[13:]
-
+                outlines = []
+                ignoreflag = True
+                for line in lines[13:]:
+                    if "------------------" in line:
+                        outlines.append("\n")
+                    else:
+                        outlines.append(line)
 
 
                 out = str(test) + "\n" + "\n".join(outlines)

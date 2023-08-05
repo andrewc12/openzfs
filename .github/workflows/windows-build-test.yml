@@ -2728,7 +2728,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
         name: build_output
-        path: ${{github.workspace}}/ifs_test_kit/AllInformationTestResults.log
+        path: ${{github.workspace}}/AllInformationTestResults.log
 
 
 

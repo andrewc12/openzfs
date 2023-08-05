@@ -226,10 +226,10 @@ def main():
             time.sleep(10)
             postTest()
 
-            for test in ['AllInformationTest']:
+            for test in ['Test']:
                 preTest(str(test) + " tests:")
                 f = PureWindowsPath(get_driveletters()[0][1])
-                ret = runWithPrint([str(p.joinpath("ifs_test_kit", "ifstest.exe")), '-g', 'Virus', '/t', str(test), str(f), '/n', '.\\' +  str(test) + 'Results.log', '/N', '356789AB', '/T', '/p', '/m', '/E', '-R', '/j', '/r', 'c:', '-d', '\\Ntfs', '-a', '\\datacoh.exe', '/u', 'ifstest', '/U', '*rw53w52'])
+                ret = runWithPrint([str(p.joinpath("ifs_test_kit", "ifstest.exe")), '-g', 'Virus', str(f), '/n', '.\\' +  str(test) + 'Results.log', '/N', '356789AB', '/T', '/p', '/m', '/E', '-R', '/j', '/r', 'c:', '-d', '\\Ntfs', '-a', '\\datacoh.exe', '/u', 'ifstest', '/U', '*rw53w52'])
 
                 time.sleep(10)
                 if ret.returncode != 0:

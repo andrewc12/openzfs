@@ -2700,14 +2700,6 @@ jobs:
 
 
 
-    - name: Adding markdown
-      run: |
-        ${{github.workspace}}\ifs_test_kit\ifstest.exe -g Virus /t AllInformationTest E:\ /n .\AllInformationTestResults.log /N 356789AB /T /p /m /E -R /j /r c: -d \Ntfs -a \datacoh.exe /u ifstest /U *rw53w52
-        ${{github.workspace}}\ifs_test_kit\ifstest.exe -g Virus /t AllInformationTest E: /n .\AllInformationTestResults.log /N 356789AB /T /p /m /E -R /j /r c: -d \Ntfs -a \datacoh.exe /u ifstest /U *rw53w52
-        Get-ChildItem -recurse -path ${{github.workspace}}
-        Get-ChildItem -recurse -path .\
-
-
 
     - name: test
       run: 'python.exe -u "${{github.workspace}}\contrib\windows\tests\ifstest.py" -path ${{github.workspace}}\'
@@ -2728,7 +2720,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
         name: build_output
-        path: ${{github.workspace}}/AllInformationTestResults.log
+        path: ${{github.workspace}}/TestResults.log
 
 
 

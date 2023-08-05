@@ -238,8 +238,17 @@ def main():
 
                 print(ret.stdout.decode())
 
-                out = str(test) + "\n" + "\n".join(
-                               ret.stdout.decode().splitlines())
+                lines = ret.stdout.decode().splitlines()
+                outlines = []
+                ignoreflag = True
+                for line in lines:
+                    if line.startswith("------------------------------- "):
+                        ignoreflag = False
+                    if not ignoreflag:
+                        outlines.append(line)
+
+
+                out = str(test) + "\n" + "\n".join(outlines)
 
                 print(out)
                 log_file.write(out)

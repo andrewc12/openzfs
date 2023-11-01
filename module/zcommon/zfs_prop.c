@@ -410,6 +410,7 @@ zfs_prop_init(void)
 		{ "off",		ZFS_MIMIC_OFF },
 		{ "hfs",		ZFS_MIMIC_HFS },
 		{ "apfs",		ZFS_MIMIC_APFS },
+		{ "ntfs",		ZFS_MIMIC_NTFS },
 		{ NULL }
 	};
 	/* __APPLE__ */

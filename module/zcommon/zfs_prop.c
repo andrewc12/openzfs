@@ -628,7 +628,7 @@ zfs_prop_init(void)
 
 	/*
 	 * These props are needed for compatability with pools created
-	 * using openzfsonosx 
+	 * using openzfsonosx
 	 */
 	zprop_register_index(ZFS_PROP_BROWSE, "com.apple.browse", 1,
 	    PROP_INHERIT, ZFS_TYPE_FILESYSTEM, "on | off",

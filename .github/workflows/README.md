@@ -31,11 +31,15 @@ end
 subgraph Code Checking + Building
   codeql.yml
   checkstyle.yml
+  Build-Ubuntu-20.04
+  Build-Ubuntu-22.04
+  Build-Ubuntu-20.04
+  Build-Ubuntu-22.04
+end
   Build-Ubuntu-20.04-->sanity-checks-20.04
   Build-Ubuntu-22.04-->sanity-checks-22.04
   Build-Ubuntu-20.04-->zloop-checks-20.04
   Build-Ubuntu-22.04-->zloop-checks-22.04
-end
 
   sanity-checks-20.04-->functional-testing-20.04
   sanity-checks-22.04-->functional-testing-22.04

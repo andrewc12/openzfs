@@ -3,13 +3,13 @@
 
 ```mermaid
 flowchart TB
-subgraph CleanUp and Summary
-  Part1-20.04-->CleanUp+nice+Summary
-  Part2-20.04-->CleanUp+nice+Summary
-  PartN-20.04-->CleanUp+nice+Summary
-  Part1-22.04-->CleanUp+nice+Summary
-  Part2-22.04-->CleanUp+nice+Summary
-  PartN-22.04-->CleanUp+nice+Summary
+subgraph Code Checking + Building
+  codeql.yml
+  checkstyle.yml
+  Build-Ubuntu-20.04-->sanity-checks-20.04
+  Build-Ubuntu-22.04-->sanity-checks-22.04
+  Build-Ubuntu-20.04-->zloop-checks-20.04
+  Build-Ubuntu-22.04-->zloop-checks-22.04
 end
 
 subgraph Sanity and zloop Testings
@@ -28,14 +28,15 @@ subgraph Functional Testings
   functional-testing-22.04-->PartN-22.04
 end
 
-subgraph Code Checking + Building
-  codeql.yml
-  checkstyle.yml
-  Build-Ubuntu-20.04-->sanity-checks-20.04
-  Build-Ubuntu-22.04-->sanity-checks-22.04
-  Build-Ubuntu-20.04-->zloop-checks-20.04
-  Build-Ubuntu-22.04-->zloop-checks-22.04
+subgraph CleanUp and Summary
+  Part1-20.04-->CleanUp+nice+Summary
+  Part2-20.04-->CleanUp+nice+Summary
+  PartN-20.04-->CleanUp+nice+Summary
+  Part1-22.04-->CleanUp+nice+Summary
+  Part2-22.04-->CleanUp+nice+Summary
+  PartN-22.04-->CleanUp+nice+Summary
 end
+
 ```
 
 

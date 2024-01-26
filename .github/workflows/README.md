@@ -19,10 +19,13 @@ subgraph Functional Testings
 end
 
 subgraph Sanity and zloop Testings
-  sanity-checks-20.04-->functional-testing-20.04
-  sanity-checks-22.04-->functional-testing-22.04
-  zloop-checks-20.04-->functional
-  zloop-checks-22.04-->functional
+  sanity-checks-20.04
+  functional-testing-20.04
+  sanity-checks-22.04
+  functional-testing-22.04
+  zloop-checks-20.04
+  functional
+  zloop-checks-22.04
 end
 
 subgraph Code Checking + Building
@@ -33,6 +36,12 @@ subgraph Code Checking + Building
   Build-Ubuntu-20.04-->zloop-checks-20.04
   Build-Ubuntu-22.04-->zloop-checks-22.04
 end
+
+  sanity-checks-20.04-->functional-testing-20.04
+  sanity-checks-22.04-->functional-testing-22.04
+  zloop-checks-20.04-->functional
+  zloop-checks-22.04-->functional
+
   functional-testing-20.04-->Part1-20.04
   functional-testing-20.04-->Part2-20.04
   functional-testing-20.04-->PartN-20.04

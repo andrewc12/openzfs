@@ -8,12 +8,14 @@ subgraph CleanUp and Summary
 end
 
 subgraph Functional Testings
-  functional-testing-20.04-->Part1-20.04
-  functional-testing-20.04-->Part2-20.04
-  functional-testing-20.04-->PartN-20.04
-  functional-testing-22.04-->Part1-22.04
-  functional-testing-22.04-->Part2-22.04
-  functional-testing-22.04-->PartN-22.04
+  functional-testing-20.04
+  functional-testing-22.04
+  Part1-20.04
+  Part2-20.04
+  PartN-20.04
+  Part1-22.04
+  Part2-22.04
+  PartN-22.04
 end
 
 subgraph Sanity and zloop Testings
@@ -31,6 +33,13 @@ subgraph Code Checking + Building
   Build-Ubuntu-20.04-->zloop-checks-20.04
   Build-Ubuntu-22.04-->zloop-checks-22.04
 end
+  functional-testing-20.04-->Part1-20.04
+  functional-testing-20.04-->Part2-20.04
+  functional-testing-20.04-->PartN-20.04
+  functional-testing-22.04-->Part1-22.04
+  functional-testing-22.04-->Part2-22.04
+  functional-testing-22.04-->PartN-22.04
+
   Part1-20.04-->CleanUp+nice+Summary
   Part2-20.04-->CleanUp+nice+Summary
   PartN-20.04-->CleanUp+nice+Summary

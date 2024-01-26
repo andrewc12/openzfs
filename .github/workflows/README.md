@@ -4,12 +4,7 @@
 ```mermaid
 flowchart TB
 subgraph CleanUp and Summary
-  Part1-20.04-->CleanUp+nice+Summary
-  Part2-20.04-->CleanUp+nice+Summary
-  PartN-20.04-->CleanUp+nice+Summary
-  Part1-22.04-->CleanUp+nice+Summary
-  Part2-22.04-->CleanUp+nice+Summary
-  PartN-22.04-->CleanUp+nice+Summary
+  CleanUp+nice+Summary
 end
 
 subgraph Functional Testings
@@ -36,6 +31,12 @@ subgraph Code Checking + Building
   Build-Ubuntu-20.04-->zloop-checks-20.04
   Build-Ubuntu-22.04-->zloop-checks-22.04
 end
+  Part1-20.04-->CleanUp+nice+Summary
+  Part2-20.04-->CleanUp+nice+Summary
+  PartN-20.04-->CleanUp+nice+Summary
+  Part1-22.04-->CleanUp+nice+Summary
+  Part2-22.04-->CleanUp+nice+Summary
+  PartN-22.04-->CleanUp+nice+Summary
 ```
 
 

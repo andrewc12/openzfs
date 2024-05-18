@@ -2327,7 +2327,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: build_output
+        name: build_output_winbtrfs.log
         path: ${{github.workspace}}/winbtrfs.log
 
 
@@ -2519,7 +2519,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: build_output
+        name: build_output_winfs.log
         path: ${{github.workspace}}/winfs.log
 
 
@@ -2717,7 +2717,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: build_output
+        name: build_output_ifstest.log
         path: ${{github.workspace}}/ifstest.log
 
 
@@ -2725,7 +2725,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: build_output
+        name: build_output_TestResults.log
         path: ${{github.workspace}}/TestResults.log
 
 

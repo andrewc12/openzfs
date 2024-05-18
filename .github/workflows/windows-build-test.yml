@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: ilammy/msvc-dev-cmd@v1
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         #repository: openzfsonwindows/openzfs
         fetch-depth: 0
@@ -63,7 +63,7 @@ jobs:
     #  run: git clone https://github.com/andrewc12/openssl.git
 
     - name: Checkout openssl
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: andrewc12/openssl # optional, default is ${{ github.repository }}
         path: openssl # optional
@@ -114,7 +114,7 @@ jobs:
 
     - name: Upload a Build Artifact
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: build_output
         path: ${{github.workspace}}/out
@@ -133,13 +133,13 @@ jobs:
 
     - name: Upload dev build
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: dev_build
         path: ${{github.workspace}}/zfs_collect/*
 
     - name: Upload dev build with Inno Setup
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: dev_build_inno
         path: ${{github.workspace}}\contrib\windows\${{ steps.innoout.outputs.name }}
@@ -212,14 +212,14 @@ jobs:
     if: ${{ false }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -474,14 +474,14 @@ jobs:
 #    if:  ${{ inputs.run-failing }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -876,14 +876,14 @@ jobs:
 #    runs-on: windows-latest
 #    steps:
 #
-#    - uses: actions/checkout@v3
+#    - uses: actions/checkout@v4
 #
 #
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: dev_build_inno
 #
-##    - uses: actions/download-artifact@v3
+##    - uses: actions/download-artifact@v4
 ##      with:
 ##        name: build result
 #
@@ -1201,7 +1201,7 @@ jobs:
 ##
 ##
 ##    - name: Upload dev build with Inno Setup
-##      uses: actions/upload-artifact@v3.1.0
+##      uses: actions/upload-artifact@v4
 ##      with:
 ##        name: testres
 ##        path: d:\test_results\*
@@ -1401,7 +1401,7 @@ jobs:
 #
 #    steps:
 #
-#    - uses: actions/checkout@v3
+#    - uses: actions/checkout@v4
 #      with:
 #        #repository: openzfsonwindows/openzfs
 #        fetch-depth: 0
@@ -1449,14 +1449,14 @@ jobs:
 #    if:  ${{ inputs.run-failing }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -1662,14 +1662,14 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -1990,14 +1990,14 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -2187,14 +2187,14 @@ jobs:
 #    if:  ${{ inputs.run-failing }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -2325,7 +2325,7 @@ jobs:
         cat ${{github.workspace}}\winbtrfs.log | Out-File $env:GITHUB_STEP_SUMMARY
 
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: build_output
         path: ${{github.workspace}}/winbtrfs.log
@@ -2349,14 +2349,14 @@ jobs:
 #    if:  ${{ inputs.run-failing }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -2517,7 +2517,7 @@ jobs:
         cat ${{github.workspace}}\winfs.log | Out-File $env:GITHUB_STEP_SUMMARY
 
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: build_output
         path: ${{github.workspace}}/winfs.log
@@ -2580,14 +2580,14 @@ jobs:
 #    if:  ${{ inputs.run-failing }}
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 
-#    - uses: actions/download-artifact@v3
+#    - uses: actions/download-artifact@v4
 #      with:
 #        name: build result
 
@@ -2715,7 +2715,7 @@ jobs:
         cat ${{github.workspace}}\ifstest.log | Out-File $env:GITHUB_STEP_SUMMARY
 
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: build_output
         path: ${{github.workspace}}/ifstest.log
@@ -2723,7 +2723,7 @@ jobs:
 
 
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+      uses: actions/upload-artifact@v4
       with:
         name: build_output
         path: ${{github.workspace}}/TestResults.log
@@ -2743,9 +2743,9 @@ jobs:
     timeout-minutes: 30
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: dev_build_inno
 

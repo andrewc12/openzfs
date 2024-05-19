@@ -431,6 +431,14 @@ def zpool_create(
             *[str(d) for d in devices],
         ],
     )
+    print([
+            "create",
+            "-f",
+            *options_to_args("-o", zpool_options),
+            *options_to_args("-O", zfs_options),
+            name,
+            *[str(d) for d in devices],
+        ])
     if res.returncode != 0:
         raise RuntimeError("Failed to create zpool")
 

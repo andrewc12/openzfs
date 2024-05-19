@@ -118,7 +118,7 @@ def main():
         #######################################################################
         preTest("regex for key file")
         with random_key(args.path / "key01.key", 32) as key01:
-            key01uri = "file:/" + str(path_to_unc(key01)).replace("\\", "/")
+            key01uri = "file:" + str(path_to_unc(key01)).replace("\\", "/")
 
             with zpool_create(
                 ctx,

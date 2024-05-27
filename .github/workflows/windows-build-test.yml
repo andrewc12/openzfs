@@ -2463,7 +2463,7 @@ jobs:
           $f.Close()
 
     - name: create pool
-      run: '& "${{ steps.registryzfs.outputs.zfspath }}\zpool.exe" create tank \\?\${{github.workspace}}\test01.dat'
+      run: '& "${{ steps.registryzfs.outputs.zfspath }}\zpool.exe" create tank ${{github.workspace}}\test01.dat'
 
     - name: get pool status
       run: '& "${{ steps.registryzfs.outputs.zfspath }}\zpool.exe" status'
